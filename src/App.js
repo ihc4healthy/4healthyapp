@@ -1,7 +1,8 @@
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {HashRouter as Router, Routes, Route} from 'react-router-dom';
 import Signin from './pages/Signin';
 import Welcome from './pages/Welcome';
+// BrowserRouter
 // import Example from './pages/Example';
 
 function App() {

@@ -44,7 +44,7 @@ function Welcome() {
                     ]} defaultSelected={1} setChoosed={setAvatar}/>
                 </div>
 
-                <button className='btn-primary w-full' type='submit'>
+                <button className='btn-primary w-full' type='submit' disabled={persona==""}>
                     <CheckIcon/>
                     ¡A crear hábitos!
                 </button>
