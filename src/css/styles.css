@@ -18,17 +18,17 @@
     @apply hover:text-text-white focus:text-text-white !important;
   }
   .btn-primary:not(:disabled) {
-    @apply bg-primary text-primary-contrast shadow-primary-dark
+    @apply bg-primary text-primary-contrast shadow-primary-darkest
       hover:bg-primary-dark focus:bg-primary-dark
       active:bg-primary-light active:text-primary-contrast !important;
   }
   .btn-secondary:not(:disabled) {
-    @apply bg-secondary text-text-white shadow-secondary-dark
+    @apply bg-secondary text-text-white shadow-secondary-darkest
       hover:bg-secondary-dark focus:bg-secondary-dark
       active:bg-secondary-light active:text-secondary-contrast !important;
   }
   .btn-danger:not(:disabled) {
-    @apply bg-danger text-danger-contrast
+    @apply bg-danger text-danger-contrast shadow-danger-darkest
       hover:bg-danger-dark focus:bg-danger-dark
       active:bg-danger-light !important;
   }
@@ -47,7 +47,7 @@
   [class^="btn-flat"]:disabled {
     @apply shadow-none bg-background-paper text-text-disabled !important;
   }
-  button svg, [class^="btn"] svg {
+  button svg, [class^="btn"] svg, span svg {
     min-width: 1.25rem;
     min-height: 1.25rem;
     max-width: 1.5rem;
