@@ -8,7 +8,7 @@ const Footer = ()=>{
                 <img src={logo} className="logo block w-full max-w-xs" alt="logo" />
                 <div className="w-full block">
                     <div>Derechos reservados ©</div>
-                    <div>4Healthy <span>❤</span></div>
+                    <div>4Healthy <span className="text-primary">❤</span></div>
                 </div>
                 <div className="w-full block">Términos y condiciones</div>
             </div>
