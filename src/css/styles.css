@@ -4,8 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
 
 @layer {
+  * {
+    @apply: focus:outline-none !important;
+  }
+  /* Buttons */
   button, [class^="btn"] {
-    @apply flex rounded-md px-3.5 py-2.5 text-sm font-semibold focus:outline-none !important;
+    @apply flex rounded-md px-3.5 py-2.5 text-sm font-semibold !important;
   }
   .btn-primary, .btn-secondary, .btn-elevated {
     @apply shadow hover:shadow-md focus:shadow active:shadow-sm !important;
@@ -42,6 +46,11 @@
   }
   [class^="btn-flat"]:disabled {
     @apply shadow-none bg-background-paper text-text-disabled !important;
+  }
+
+  /* Input */
+  input {
+    @apply outline-none !important;
   }
 }
 
