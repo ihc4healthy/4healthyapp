@@ -3,6 +3,48 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
 
+@layer {
+  button, [class^="btn"] {
+    @apply flex rounded-md px-3.5 py-2.5 text-sm font-semibold focus:outline-none !important;
+  }
+  .btn-primary, .btn-secondary, .btn-elevated {
+    @apply shadow hover:shadow-md focus:shadow active:shadow-sm !important;
+  }
+  .btn-primary, .btn-secondary {
+    @apply hover:text-text-white focus:text-text-white !important;
+  }
+  .btn-primary:not(:disabled) {
+    @apply bg-primary text-primary-contrast shadow-primary-dark
+      hover:bg-primary-dark focus:bg-primary-dark
+      active:bg-primary-light active:text-primary-contrast !important;
+  }
+  .btn-secondary:not(:disabled) {
+    @apply bg-secondary text-text-white shadow-secondary-dark
+      hover:bg-secondary-dark focus:bg-secondary-dark
+      active:bg-secondary-light active:text-secondary-contrast !important;
+  }
+  .btn-danger:not(:disabled) {
+    @apply bg-danger text-danger-contrast
+      hover:bg-danger-dark focus:bg-danger-dark
+      active:bg-danger-light !important;
+  }
+  [class^="btn-"]:disabled {
+    @apply shadow bg-background-disabled text-text-disabled !important;
+  }
+  [class^="btn-flat"]:not(:disabled) {
+    @apply bg-background-paper hover:bg-[#00000010] focus:bg-[#00000010] active:bg-[#00000005] !important;
+  }
+  .btn-flat-primary {
+    @apply text-primary-dark !important;
+  }
+  .btn-flat-secondary {
+    @apply text-secondary-dark !important;
+  }
+  [class^="btn-flat"]:disabled {
+    @apply shadow-none bg-background-paper text-text-disabled !important;
+  }
+}
+
 :root {
    --primary-light: #fce978;
    --primary-main: #fbd254;

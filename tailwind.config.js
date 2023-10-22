@@ -21,10 +21,17 @@ module.exports = {
         dark:     '#3b719f',
         contrast: '#222b36',
       },
+      danger: {
+        light:    '#E44E4E',
+        DEFAULT:  '#DE2323',
+        dark:     '#CC2020',
+        contrast: '#ffffff',
+      },
       text: {
         primary: '#222b36',
         secondary: '#7a8291',
         disabled: '#c5c8cf',
+        white: '#ffffff',
       },
       background: {
         back: '#fafbfc',
