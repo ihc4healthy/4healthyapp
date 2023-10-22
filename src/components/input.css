@@ -25,6 +25,9 @@
     [class^="input"] input {
         @apply w-full bg-transparent;
     }
+    [class^="input"] input::-ms-reveal, [class^="input"] input::-ms-clear {
+        display: none;
+    }
     [class^="input"] label {
         @apply text-text-secondary;
     }
