@@ -1,0 +1,22 @@
+
+@layer {
+    .toggle-button button, .toggle-button [class^="btn"] {
+        @apply hover:bg-[#00000005] active:bg-[#00000010] !important;
+    }
+    .toggle-button button.active, .toggle-button [class^="btn"].active {
+        @apply bg-[#00000010] !important;
+    }
+}
+
+.toggle-button button svg, .toggle-button [class^="btn"] svg {
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    max-width: 2.5rem;
+    max-height: 2.5rem;
+}
+.toggle-button button img, .toggle-button [class^="btn"] img {
+    min-width: 8rem;
+    min-height: 8rem;
+    max-width: 10rem;
+    max-height: 10rem;
+}
