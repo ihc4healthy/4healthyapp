@@ -20,9 +20,11 @@ function App() {
         <button className='btn-flat-primary'>bbb</button>
         <button className='btn-flat-secondary'>bbb</button>
       </div>
-      <div>
+      <div className='flex'>
         <Input label="price" type="text" name="price" placeholder="0.0" disabled />
         <Input label="price" type="text" name="price" placeholder="0.0" />
+        <Input label="price" type="text" name="price" placeholder="0.0"
+        beforeInput={<select><option>A</option></select>} />
         <Input label="price" color="primary" type="text" name="price" placeholder="0.0" />
         <Input label="price" color="secondary" type="text" name="price" placeholder="0.0" />
         <Input label="price" color="danger" type="text" name="price" placeholder="0.0" helpText="Nooo"/>

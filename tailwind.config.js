@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     colors: {
       //accentColor
+      transparent: 'transparent',
       primary: {
         light:    '#fce978',
         DEFAULT:  '#fbd254',

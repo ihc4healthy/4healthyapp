@@ -5,7 +5,7 @@
     }
     [class^="input"] .cont {
         @apply rounded py-1.5 px-4 sm:text-sm sm:leading-6
-        w-full flex flex-col items-start
+        grow flex flex-col items-start
         text-text-primary placeholder:text-text-secondary
         bg-[#00000005] border-b-2 border-text-secondary 
         hover:border-b-2 hover:border-text-primary !important;
@@ -17,13 +17,13 @@
         @apply active:border-secondary focus-within:border-secondary !important;
     }
     .input-danger, .input-danger .cont {
-        @apply border-danger !important;
+        @apply border-danger hover:border-danger active:border-danger !important;
     }
     [class^="input"][disabled] .cont, [class^="input"]:disabled .cont {
         @apply text-text-disabled border-text-disabled !important;
     }
     [class^="input"] input {
-        @apply w-full bg-[#00000000];
+        @apply w-full bg-transparent;
     }
     [class^="input"] label {
         @apply text-text-secondary;

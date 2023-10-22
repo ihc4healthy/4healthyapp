@@ -48,9 +48,12 @@
     @apply shadow-none bg-background-paper text-text-disabled !important;
   }
 
-  /* Input */
-  input {
+  /* Inputs */
+  input, select {
     @apply outline-none !important;
+  }
+  select {
+    @apply bg-transparent;
   }
 }
 
