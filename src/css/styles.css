@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
+
+@layer {
+  * {
+    @apply: focus:outline-none !important;
+  }
+  /* Buttons */
+  button, [class^="btn"] {
+    @apply flex rounded-md px-3.5 py-2.5 text-sm font-semibold !important;
+  }
+  .btn-primary, .btn-secondary, .btn-elevated {
+    @apply shadow hover:shadow-md focus:shadow active:shadow-sm !important;
+  }
+  .btn-primary, .btn-secondary {
+    @apply hover:text-text-white focus:text-text-white !important;
+  }
+  .btn-primary:not(:disabled) {
+    @apply bg-primary text-primary-contrast shadow-primary-dark
+      hover:bg-primary-dark focus:bg-primary-dark
+      active:bg-primary-light active:text-primary-contrast !important;
+  }
+  .btn-secondary:not(:disabled) {
+    @apply bg-secondary text-text-white shadow-secondary-dark
+      hover:bg-secondary-dark focus:bg-secondary-dark
+      active:bg-secondary-light active:text-secondary-contrast !important;
+  }
+  .btn-danger:not(:disabled) {
+    @apply bg-danger text-danger-contrast
+      hover:bg-danger-dark focus:bg-danger-dark
+      active:bg-danger-light !important;
+  }
+  [class^="btn-"]:disabled {
+    @apply shadow bg-background-disabled text-text-disabled !important;
+  }
+  [class^="btn-flat"]:not(:disabled) {
+    @apply bg-background-paper hover:bg-[#00000010] focus:bg-[#00000010] active:bg-[#00000005] !important;
+  }
+  .btn-flat-primary {
+    @apply text-primary-dark !important;
+  }
+  .btn-flat-secondary {
+    @apply text-secondary-dark !important;
+  }
+  [class^="btn-flat"]:disabled {
+    @apply shadow-none bg-background-paper text-text-disabled !important;
+  }
+
+  /* Inputs */
+  input, select {
+    @apply outline-none !important;
+  }
+  select {
+    @apply bg-transparent;
+  }
+}
+
+:root {
+   --primary-light: #fce978;
+   --primary-main: #fbd254;
+   --primary-dark: #eca540;
+   --secondary-light: #00d9f4;
+   --secondary-main: #009ed5;
+   --secondary-dark: #3b719f;
+   --text-primary: #222b36;
+   --text-secondary: #7a8291;
+   --text-disabled: #c5c8cf;
+   --background-back: #fafbfc;
+   --background-paper: #ffffff;
+   --background-disabled: #e2e7ec;
+   --state-info: #75baf6;
+   --state-success: #00ebab;
+   --state-warning: #000000;
+   --state-danger: #ee252b;
+   --shadow-lvl1: 0px 0px 4pt rgba(0, 0, 0, 0.3);
+   --shadow-lvl2: 0px 0px 8pt rgba(0, 0, 0, 0.3);
+   --shadow-lvl3: 0px 0px 16pt rgba(0, 0, 0, 0.3);
+   --font-headings: 'Poppins', 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   --font-display: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif; */
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-headings);
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
