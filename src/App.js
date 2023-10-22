@@ -1,11 +1,16 @@
 import './App.css';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Signin from './pages/Signin';
 // import Example from './pages/Example';
 
 function App() {
   return (
-    <div className="App w-full">
+    <Router>
+      <Routes>
+        <Route path="/signin" element={<Signin/>}/>
+      </Routes>
       {/* <Example/> */}
-    </div>
+    </Router>
   );
 }
 

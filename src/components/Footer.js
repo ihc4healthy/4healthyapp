@@ -6,7 +6,7 @@ const Footer = ()=>{
         <footer className="w-full">
             <div className="container mx-auto grid grid-cols-3 items-center">
                 <img src={logo} className="logo block w-full max-w-xs" alt="logo" />
-                <div className="w-full block">
+                <div className="w-full block text-center">
                     <div>Derechos reservados ©</div>
                     <div>4Healthy <span className="text-primary">❤</span></div>
                 </div>

@@ -41,6 +41,6 @@
         @apply text-danger-dark !important;
     }
     [class^="input"] .helper {
-        @apply block w-full text-left py-1.5 px-4;
+        @apply block w-full text-left py-1.5 px-4 text-sm;
     }
 }

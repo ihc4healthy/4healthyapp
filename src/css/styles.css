@@ -9,7 +9,7 @@
   }
   /* Buttons */
   button, [class^="btn"] {
-    @apply flex rounded-md px-3.5 py-2.5 text-sm font-semibold !important;
+    @apply flex gap-x-2 justify-center rounded-md px-3.5 py-2.5 text-sm font-semibold !important;
   }
   .btn-primary, .btn-secondary, .btn-elevated {
     @apply shadow hover:shadow-md focus:shadow active:shadow-sm !important;
@@ -47,6 +47,12 @@
   [class^="btn-flat"]:disabled {
     @apply shadow-none bg-background-paper text-text-disabled !important;
   }
+  button svg, [class^="btn"] svg {
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+  }
 
   /* Inputs */
   input, select {
@@ -55,30 +61,35 @@
   select {
     @apply bg-transparent;
   }
+
+  /*  */
+  .full-page {
+    @apply flex flex-col min-h-screen;
+  }
 }
 
 :root {
-   --primary-light: #fce978;
-   --primary-main: #fbd254;
-   --primary-dark: #eca540;
-   --secondary-light: #00d9f4;
-   --secondary-main: #009ed5;
-   --secondary-dark: #3b719f;
-   --text-primary: #222b36;
-   --text-secondary: #7a8291;
-   --text-disabled: #c5c8cf;
-   --background-back: #fafbfc;
-   --background-paper: #ffffff;
-   --background-disabled: #e2e7ec;
-   --state-info: #75baf6;
-   --state-success: #00ebab;
-   --state-warning: #000000;
-   --state-danger: #ee252b;
-   --shadow-lvl1: 0px 0px 4pt rgba(0, 0, 0, 0.3);
-   --shadow-lvl2: 0px 0px 8pt rgba(0, 0, 0, 0.3);
-   --shadow-lvl3: 0px 0px 16pt rgba(0, 0, 0, 0.3);
-   --font-headings: 'Poppins', 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-   --font-display: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --primary-light: #fce978;
+    --primary-main: #fbd254;
+    --primary-dark: #eca540;
+    --secondary-light: #00d9f4;
+    --secondary-main: #009ed5;
+    --secondary-dark: #3b719f;
+    --text-primary: #222b36;
+    --text-secondary: #7a8291;
+    --text-disabled: #c5c8cf;
+    --background-back: #fafbfc;
+    --background-paper: #ffffff;
+    --background-disabled: #e2e7ec;
+    --state-info: #75baf6;
+    --state-success: #00ebab;
+    --state-warning: #000000;
+    --state-danger: #ee252b;
+    --shadow-lvl1: 0px 0px 4pt rgba(0, 0, 0, 0.3);
+    --shadow-lvl2: 0px 0px 8pt rgba(0, 0, 0, 0.3);
+    --shadow-lvl3: 0px 0px 16pt rgba(0, 0, 0, 0.3);
+    --font-headings: 'Poppins', 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --font-display: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 body {
@@ -90,12 +101,19 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-headings);
-  }
+h1, h2, h3, h4, h5, .bold-big {
+  font-family: var(--font-headings);
+}
 
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  font-weight: 500;
+}
