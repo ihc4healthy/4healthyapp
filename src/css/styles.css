@@ -9,7 +9,7 @@
   }
   /* Buttons */
   button, [class^="btn"] {
-    @apply flex gap-x-2 justify-center rounded-md px-3.5 py-2.5 text-sm font-semibold !important;
+    @apply flex gap-x-2 justify-center rounded-md px-3.5 py-2.5 text-sm font-semibold uppercase !important;
   }
   .btn-primary, .btn-secondary, .btn-elevated {
     @apply shadow hover:shadow-md focus:shadow active:shadow-sm !important;
