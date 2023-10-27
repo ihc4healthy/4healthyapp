@@ -117,3 +117,34 @@ code {
 a {
   font-weight: 500;
 }
+.logros-content {
+  display: flex;
+}
+.logros{
+  margin-left: 30px;
+font-size: 30px;
+
+}
+
+
+.logros-icon {
+  font-size: 60px;
+  margin: 20px;
+}
+.progress{
+  margin: 20px;
+
+
+}
+.info-data{
+display: flex;
+  
+}
+
+
+.habit-progress{
+  padding: 0px 20px; 
+
+  font-size: 20px;
+  
+}
