@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import clock from '../svgs/clock.svg';
 import Input from '../components/Input';
-import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
+//import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom';
 import { regex } from '../utils/regexs';
 
@@ -107,11 +107,13 @@ function Signin() {
                         type="text" color={userComp.color} setValue={setUsername}/>
                     <Input label="Contraseña" placeholder="******" helpText={passwordComp.helper}
                         type="password" color={passwordComp.color} setValue={setPassword}/>
+                        <a href='#/' className='text-secondary'>¿Has olvidado tu contraseña?</a>
+
+                    <p>¿Aun no eres parte de 4Healty? <a href='#/' className='text-secondary'>Únete</a></p>
 
                     <Link to="/welcome">
                         <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
-                            <ArrowRightOnRectangleIcon/>
-                            Únete
+                            INICIA SESIÓN
                         </button>
                     </Link>
                 </form>
