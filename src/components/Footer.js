@@ -1,6 +1,5 @@
 import React from "react"
 import logo from '../logo.svg';
-import { Link } from 'react-router-dom';
 
 const Footer = ()=>{
     return (
@@ -11,9 +10,7 @@ const Footer = ()=>{
                     <div>Derechos reservados ©</div>
                     <div>4Healthy <span className="text-primary">❤</span></div>
                 </div>
-                <div className="block text-right">
-                <Link to="/Terminos">Términos y condiciones</Link>
-                </div>
+                <div className="block text-right"><a href="#">Términos y condiciones</a></div>
             </div>
         </footer>
     );
