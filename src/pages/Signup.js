@@ -7,7 +7,7 @@ import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom';
 import { regex } from '../utils/regexs';
 
-function Signin() {
+function Signup() {
     const existentUsernames = ['aaaa','bbbb','cccc'];
 
     const [password, setPassword] = useState("");
@@ -108,6 +108,8 @@ function Signin() {
                     <Input label="Contraseña" placeholder="******" helpText={passwordComp.helper}
                         type="password" color={passwordComp.color} setValue={setPassword}/>
 
+                    <p>¿Ya eres parte de 4Healty? <a href='#/singin' className='text-secondary-dark'>Ingresa</a></p>
+
                     <Link to="/welcome">
                         <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
                             <ArrowRightOnRectangleIcon/>
@@ -122,4 +124,4 @@ function Signin() {
     )
 }
 
-export default Signin;
+export default Signup;
