@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import clock from '../svgs/clock.svg';
 import Input from '../components/Input';
-import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 import { regex } from '../utils/regexs';
 import '../css/styles.css';
@@ -33,10 +31,7 @@ function Restore() {
             }
         }
         else {
-            if (email.length > 16) {
-                emailComp.helper = "Máximo 16 caracteres";
-            }
-            else if (!regex.userName.test(email)){
+            if (!regex.userName.test(email)){
                 emailComp.helper = "Solo usar letras, números, o los caracteres _ . -";
             }
             else {
@@ -77,8 +72,7 @@ function Restore() {
                         <form name='restore' id='restore' className='flex flex-col gap-y-4'>
                     <       Input label="Correo electronico" helpText={emailComp.helper}
                             type="text" color={emailComp.color} setValue={setEmail}/>
-
-                            <Link to="/Terminos">
+                            <Link to={`/verification?email=${email}`}>
                                 <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
                                     ENVIAR
                                 </button>

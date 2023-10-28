@@ -28,7 +28,11 @@ body {
     margin: 0;
     padding: 0;
     color: var(--text-primary);
+<<<<<<< HEAD
     /* background-image: url("../svgs/backHome.svg"); */
+=======
+    background-image: url("../svgs/backHome.svg");
+>>>>>>> SCRUM-9-Recuperaci-n-de-Contrase-a-Segura
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -96,5 +100,9 @@ body {
 }
 
 a {
+<<<<<<< HEAD
     color: var(--primary-dark);
+=======
+    color: blue
+>>>>>>> SCRUM-9-Recuperaci-n-de-Contrase-a-Segura
 }
