@@ -1,0 +1,49 @@
+
+@layer {
+    [class^="input"] {
+    /* ring-1 ring-inset ring-gray-300 */
+    }
+    [class^="input"] .cont {
+        @apply rounded py-1.5 px-4 sm:text-sm sm:leading-6
+        grow flex flex-col items-start
+        text-text-primary placeholder:text-text-secondary
+        bg-[#00000005] border-b-2 border-text-secondary 
+        hover:border-b-2 hover:border-text-primary !important;
+    }
+    .input-primary, .input-primary .cont {
+        @apply active:border-primary focus-within:border-primary !important;
+    }
+    .input-secondary, .input-secondary .cont {
+        @apply active:border-secondary focus-within:border-secondary !important;
+    }
+    .input-danger, .input-danger .cont {
+        @apply border-danger hover:border-danger active:border-danger !important;
+    }
+    [class^="input"][disabled] .cont, [class^="input"]:disabled .cont {
+        @apply text-text-disabled border-text-disabled !important;
+    }
+    [class^="input"] input {
+        @apply w-full bg-transparent;
+    }
+    [class^="input"] input::-ms-reveal, [class^="input"] input::-ms-clear {
+        display: none;
+    }
+    [class^="input"] label {
+        @apply text-text-secondary;
+    }
+    [class^="input"]:focus-within label {
+        @apply text-text-primary;
+    }
+    .input-primary:focus-within label, .input-primary:active label {
+        @apply text-primary-dark !important;
+    }
+    .input-secondary:focus-within label, .input-secondary:active label {
+        @apply text-secondary-dark !important;
+    }
+    .input-danger label, .input-danger .helper {
+        @apply text-danger-dark !important;
+    }
+    [class^="input"] .helper {
+        @apply block w-full text-left py-1.5 px-4 text-sm;
+    }
+}

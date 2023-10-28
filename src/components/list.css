@@ -1,0 +1,162 @@
+h2{
+font-size: 22px;
+    }
+h3{
+    font-size: 14px;
+    }
+
+.customer-form {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 5px;
+    height: auto;
+    width: auto;
+    background-color: #fff;
+    border-radius: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   justify-content: center;
+
+  }
+.contenedor{
+    align-items: center;
+    display: flex;
+    margin:10px
+
+}
+.contenedor h2{
+font-size: 20px;
+}
+
+.icon{
+margin-left: 20px;
+scale: 0.8 0.8;
+transition: 0.2s;
+object-fit: cover;
+
+}
+
+.icon:hover{
+transform: scale(1.2);
+}
+
+
+.customer-form ul{
+    display: flex;
+   
+}
+
+.datos-form h3{
+    font-size: 13px;
+
+  }
+
+.contenedor-datos{
+display: flex;
+flex-direction: column;
+
+
+}
+
+.datos-form {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 20px;
+    height: auto;
+    width: auto;
+    background-color: #fff;
+    border-radius: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   justify-content: center;
+
+  }
+
+
+
+.progress-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 5px;
+    height: auto;
+    width: auto;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   justify-content: center;
+
+  }
+
+
+  .flexbuttons{
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 5px;
+    height: auto;
+    width: auto;
+
+   justify-content: center;
+
+  }
+  .flextop{
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 5px;
+    height: auto;
+    width: auto;
+
+    justify-content:space-between;
+
+  }
+  .buttons{
+
+
+    padding: 20px;
+
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   justify-content: center;
+   margin-right: 10px;
+   margin-left: 10px;
+  }
+
+  .habit-form {
+    font-size: 20px;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 12px;
+    height: auto;
+    width: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    transition: 0.2s;
+    object-fit: cover;
+
+  } 
+.habit-form:hover{
+    transform: scale(1.1);
+    }
+    
+
+
+
+
+
+  .goal{
+    scale: 0.6 0.6;
+  }
