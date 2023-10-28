@@ -1,29 +1,29 @@
 import './App.css';
-import {HashRouter as Router, Routes, Route} from 'react-router-dom';
-import Signin from './pages/Signin';
+import {HashRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import Signup from './pages/Signup';
 import Welcome from './pages/Welcome';
-<<<<<<< HEAD
 import Logros from './pages/Logros';
-
-=======
 import Restore from './pages/Restore';
 import Terminos from './pages/Terminos';
->>>>>>> 10a4f55b00e624d078913eb8e997aaaef0f3f0ed
 // BrowserRouter
 // import Example from './pages/Example';
 
 function App() {
+  let user = localStorage.getItem('user');
+  //https://stackoverflow.com/questions/52931183/how-to-save-variables-to-localstorage-in-reactjs
+  // localStorage.setItem('user', );
+
   return (
     <Router>
       <Routes>
-        <Route path="/signin" element={<Signin/>}/>
+        <Route path="/" element={
+          <Navigate to={user === null?"/signup":"/logros"} replace />
+        }/>
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/welcome" element={<Welcome/>}/>
-<<<<<<< HEAD
         <Route path="/logros" element={<Logros/>}/>
-=======
-        <Route path="/Terminos" element={<Terminos/>}/>
-        <Route path="/Restore" element={<Restore/>}/>
->>>>>>> 10a4f55b00e624d078913eb8e997aaaef0f3f0ed
+        <Route path="/terminos" element={<Terminos/>}/>
+        <Route path="/restore" element={<Restore/>}/>
       </Routes>
       {/* <Example/> */}
     </Router>

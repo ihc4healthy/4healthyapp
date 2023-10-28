@@ -7,7 +7,7 @@ import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom';
 import { regex } from '../utils/regexs';
 
-function Signin() {
+function Signup() {
     const existentUsernames = ['aaaa','bbbb','cccc'];
 
     const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ function Signin() {
     
     const [passwordComp, setPasswordComp] = useState({color:"primary", helper:"Usar letras y números", isReady:false});
     const [userComp, setUserComp] = useState({color:"primary", helper:"Debe ser mayor a 4 caracteres", isReady:false});
-    const [canSignin, setCanSignin] = useState(false);
+    const [canSignup, setCanSignup] = useState(false);
     
     useEffect(()=>{
         let isOk = false;
@@ -83,7 +83,7 @@ function Signin() {
     }, [username]);
 
     useEffect(()=>{
-        setCanSignin(userComp.isReady && passwordComp.isReady);
+        setCanSignup(userComp.isReady && passwordComp.isReady);
     },[userComp.isReady, passwordComp.isReady]);
 
     return (
@@ -102,7 +102,7 @@ function Signin() {
                     un <span className='text-text-secondary'>hábito</span>
                 </p>
 
-                <form name='signin' id='signin' className='flex flex-col gap-y-4'>
+                <form name='Signup' id='Signup' className='flex flex-col gap-y-4'>
                     <Input label="Nombre de usuario" placeholder="nomusuario" helpText={userComp.helper}
                         type="text" color={userComp.color} setValue={setUsername}/>
                     <Input label="Contraseña" placeholder="******" helpText={passwordComp.helper}
@@ -111,7 +111,7 @@ function Signin() {
                     <p>¿Ya eres parte de 4Healty? <a href='#' className='text-secondary-dark'>Ingresa</a></p>
 
                     <Link to="/welcome">
-                        <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
+                        <button className='btn-primary w-full' type='submit' disabled={!canSignup}>
                             <ArrowRightOnRectangleIcon/>
                             Únete
                         </button>
@@ -124,4 +124,4 @@ function Signin() {
     )
 }
 
-export default Signin;
+export default Signup;

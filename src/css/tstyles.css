@@ -28,7 +28,7 @@ body {
     margin: 0;
     padding: 0;
     color: var(--text-primary);
-    background-image: url("../svgs/backHome.svg");
+    /* background-image: url("../svgs/backHome.svg"); */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -96,5 +96,5 @@ body {
 }
 
 a {
-    color: blue
+    color: var(--primary-dark);
 }
