@@ -117,6 +117,7 @@ code {
 a {
   font-weight: 500;
 }
+<<<<<<< HEAD
 .logros-content {
   display: flex;
 }
@@ -148,3 +149,77 @@ display: flex;
   font-size: 20px;
   
 }
+=======
+
+.centered-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px; /* Puedes ajustar la anchura máxima según tus necesidades */
+  margin: 10px; /* Centra horizontalmente */
+  padding: 50px; /* Espacio mínimo en los bordes */
+}
+
+/* Estilos específicos para el formulario de Restore */
+.restore-title {
+  text-align: center;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.restore-description {
+  color: #222b36;
+  text-align: justify;
+}
+
+.contact-support {
+  text-align: justify;
+  color: #222b36;
+  
+}
+
+.support-text {
+  color: #83AED4;
+}
+
+.email-label {
+  color: #000000;
+  font-weight: 700;
+}
+
+.email-input {
+  margin-top: 10px;
+}
+
+.recaptcha-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilos para el cuadro de reCAPTCHA */
+.g-recaptcha {
+  display: inline-block;
+  width: auto; /* Ajusta el ancho según tus necesidades */
+}
+
+/* Estilos para los errores del reCAPTCHA (opcional) */
+.recaptcha-error {
+  color: #ee252b; /* Color para errores */
+  font-size: 14px; /* Tamaño de fuente para errores */
+  margin-top: 10px; /* Espacio superior para errores */
+}
+
+.send-button {
+  background-color: #fbd254;
+  color: #222b36;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+>>>>>>> 10a4f55b00e624d078913eb8e997aaaef0f3f0ed
