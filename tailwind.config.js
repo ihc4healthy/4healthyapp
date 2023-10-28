@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
   content: [
-    './src/**/*.{js,jsx,ts,tsx}',
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "path-to-your-node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
+    "path-to-your-node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
     './pages/**/*.{html,js}',
     './components/**/*.{html,js}',
     './index.html',
-  ],
+   ],
   theme: {
     colors: {
       //accentColor
@@ -50,5 +54,5 @@ module.exports = {
     },
   },
   plugins: [],
-}
+});
 
