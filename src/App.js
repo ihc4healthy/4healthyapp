@@ -1,7 +1,7 @@
 import './App.css';
 import {HashRouter as Router, Routes, Route} from 'react-router-dom';
 import Signup from './pages/Signup';
-import Signin from './pages/Signin';
+import Login from './pages/Login';
 import Welcome from './pages/Welcome';
 // BrowserRouter
 // import Example from './pages/Example';
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Signup/>}/>
-        <Route path="/singin" element={<Signin/>}/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/welcome" element={<Welcome/>}/>
       </Routes>
       {/* <Example/> */}
