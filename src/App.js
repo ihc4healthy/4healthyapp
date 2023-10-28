@@ -4,6 +4,8 @@ import Signin from './pages/Signin';
 import Welcome from './pages/Welcome';
 import Restore from './pages/Restore';
 import Terminos from './pages/Terminos';
+import Verification from './pages/Verification'
+import Confirm from './pages/Confirm'
 // import Example from './pages/Example';
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
         <Route path="/Signin" element={<Signin/>}/>
         <Route path="/welcome" element={<Welcome/>}/>
         <Route path="/Terminos" element={<Terminos/>}/>
+        <Route path="/Verification" element={<Verification/>}/>
+        <Route path="/Confirm" element={<Confirm/>}/>
       </Routes>
     </Router>
   );
