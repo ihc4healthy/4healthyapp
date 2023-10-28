@@ -1,7 +1,7 @@
 import './App.css';
-import Signin from './pages/Signin';
-import {HashRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import {HashRouter as Router, Routes, Route} from 'react-router-dom';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 import Welcome from './pages/Welcome';
 import Logros from './pages/Logros';
 import Restore from './pages/Restore';
@@ -21,10 +21,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/singin" element={<Signin/>}/>
         <Route path="/" element={
           <Navigate to={user === null?"/signup":"/logros"} replace />
         }/>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/welcome" element={<Welcome/>}/>
         <Route path="/logros" element={<Logros/>}/>
