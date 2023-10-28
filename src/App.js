@@ -17,10 +17,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/singin" element={<Signin/>}/>
         <Route path="/" element={
           <Navigate to={user === null?"/signup":"/logros"} replace />
         }/>
+        <Route path="/signin" element={<Signin/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/welcome" element={<Welcome/>}/>
         <Route path="/logros" element={<Logros/>}/>
