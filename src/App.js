@@ -29,9 +29,9 @@ function App() {
         <Route path="/logros" element={<Logros/>}/>
         <Route path="/terminos" element={<Terminos/>}/>
         <Route path="/restore" element={<Restore/>}/>
-        <Route path="/Signin" element={<Signin/>}/>
-        <Route path="/Verification" element={<Verification/>}/>
-        <Route path="/Confirm" element={<Confirm/>}/>
+        <Route path="/signin" element={<Signin/>}/>
+        <Route path="/verification" element={<Verification/>}/>
+        <Route path="/confirm" element={<Confirm/>}/>
       </Routes>
     </Router>
   );

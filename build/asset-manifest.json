@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/4healthyapp/static/css/main.1f12c13e.css",
-    "main.js": "/4healthyapp/static/js/main.492ce732.js",
+    "main.css": "/4healthyapp/static/css/main.1b34ba12.css",
+    "main.js": "/4healthyapp/static/js/main.ed63ffe3.js",
     "static/js/787.1878dead.chunk.js": "/4healthyapp/static/js/787.1878dead.chunk.js",
     "static/media/welcome.svg": "/4healthyapp/static/media/welcome.ecb7d89a685d8ebabd4c533f9484f943.svg",
     "static/media/clock.svg": "/4healthyapp/static/media/clock.00446b07333233347ebddd63d11ae524.svg",
     "static/media/logo.svg": "/4healthyapp/static/media/logo.8cc6ca32ab41ed3bfb69cb516c27c16c.svg",
     "index.html": "/4healthyapp/index.html",
-    "main.1f12c13e.css.map": "/4healthyapp/static/css/main.1f12c13e.css.map",
-    "main.492ce732.js.map": "/4healthyapp/static/js/main.492ce732.js.map",
+    "main.1b34ba12.css.map": "/4healthyapp/static/css/main.1b34ba12.css.map",
+    "main.ed63ffe3.js.map": "/4healthyapp/static/js/main.ed63ffe3.js.map",
     "787.1878dead.chunk.js.map": "/4healthyapp/static/js/787.1878dead.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1f12c13e.css",
-    "static/js/main.492ce732.js"
+    "static/css/main.1b34ba12.css",
+    "static/js/main.ed63ffe3.js"
   ]
 }
