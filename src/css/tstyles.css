@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
-
+/* 
 :root {
    --primary-light: #fce978;
    --primary-main: #fbd254;
@@ -22,7 +22,7 @@
    --shadow-lvl3: 0px 0px 16pt rgba(0, 0, 0, 0.3);
    --font-headings: 'Poppins', 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
    --font-display: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
+} */
 
 body {
     margin: 0;
@@ -97,5 +97,4 @@ body {
 
 a {
     color: var(--primary-dark);
-    color: blue
 }

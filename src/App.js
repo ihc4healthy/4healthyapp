@@ -7,6 +7,7 @@ import Welcome from './pages/Welcome';
 import Logros from './pages/Logros';
 import Restore from './pages/Restore';
 import Terminos from './pages/Terminos';
+import NewHabit from './pages/habit/NewHabit';
 // BrowserRouter
 import Verification from './pages/Verification'
 import Confirm from './pages/Confirm'
@@ -32,6 +33,9 @@ function App() {
         <Route path="/signin" element={<Signin/>}/>
         <Route path="/verification" element={<Verification/>}/>
         <Route path="/confirm" element={<Confirm/>}/>
+        <Route path="/habits">
+          <Route path='new' element={<NewHabit/>}/>
+        </Route>
       </Routes>
     </Router>
   );
