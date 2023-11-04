@@ -4,11 +4,24 @@ import './css/styles.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@material-tailwind/react';
+import { customTheme } from './utils/customTheme';
+
+// const consoleWarn = console.warn;
+// const SUPPRESSED_WARNINGS = ['color'];
+
+// console.warn = function filterWarnings(msg, ...args) {
+//     if (!SUPPRESSED_WARNINGS.some((entry) => msg.includes(entry))) {
+//         consoleWarn(msg, ...args);
+//     }
+// };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider value={customTheme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
