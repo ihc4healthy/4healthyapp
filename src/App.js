@@ -6,6 +6,7 @@ import Welcome from './pages/Welcome';
 import Logros from './pages/Logros';
 import Restore from './pages/Restore';
 import Terminos from './pages/Terminos';
+import NewHabit from './pages/habit/NewHabit';
 // BrowserRouter
 // import Example from './pages/Example';
 
@@ -26,6 +27,9 @@ function App() {
         <Route path="/logros" element={<Logros/>}/>
         <Route path="/terminos" element={<Terminos/>}/>
         <Route path="/restore" element={<Restore/>}/>
+        <Route path="/habits">
+          <Route path='new' element={<NewHabit/>}/>
+        </Route>
       </Routes>
       {/* <Example/> */}
     </Router>
