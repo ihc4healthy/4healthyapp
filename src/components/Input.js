@@ -21,7 +21,7 @@ const Input = ({label, type, placeholder, name, helpText,
             <div className="flex w-full gap-x-4">
                 {beforeInput}
                 <input type={toggleVisibility.inputType} name={name} id={id}
-                    placeholder={placeholder}
+                    placeholder={placeholder ? placeholder :label}
                     disabled={disabled} required={required} readOnly={readonly}
                     onInput={(event)=>{
                         if (setValue) { setValue(event.target.value); }

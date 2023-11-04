@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import { ListLogros } from '../components/ListLogros';
-import { DSidebar } from '../components/sidenav';
+import { DSidebar } from '../components/Sidenav';
 import { ListDatos } from '../components/ListDatos';
 import { ListProgress } from '../components/ListProgress';
 
