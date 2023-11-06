@@ -5,6 +5,7 @@
 const defaultColors = ["white", "blue-gray", "gray", "brown", "deep-orange", "orange", 
                        "amber", "yellow", "lime", "light-green", "green", "teal", "cyan",
                        "light-blue", "blue", "indigo", "deep-purple", "purple", "pink", "red",];
+const validColors = [...defaultColors, "primary", "secondary", "danger"];
 const btnFillGradFocusActive = {
   focus: "focus:opacity-[0.85] focus:shadow-none",
   active: "active:opacity-[0.85] active:shadow-none",
@@ -36,7 +37,7 @@ const btnFillGrad = {
 const customTheme = {
   button: {
     valid: {
-      colors: [...defaultColors, "primary", "secondary", "danger"],
+      colors: validColors,
     },
     styles: {
       variants: {
@@ -62,6 +63,56 @@ const customTheme = {
     }
   },
   //============================================//
+  radio: {
+    valid: {
+      colors: validColors,
+    },
+    styles: {
+      colors: {
+        primary: {
+          color: "text-primary",
+          border: "checked:border-primary",
+          before: "checked:before:bg-primary",
+        },
+        secondary: {
+          color: "text-secondary",
+          border: "checked:border-secondary",
+          before: "checked:before:bg-secondary",
+        },
+        danger: {
+          color: "text-danger",
+          border: "checked:border-danger",
+          before: "checked:before:bg-danger",
+        },
+      }
+    }
+  },
+  //============================================//
+  checkbox: {
+    valid: {
+      colors: validColors,
+    },
+    styles: {
+      colors: {
+
+        primary: {
+          background: "checked:bg-primary",
+          border: "checked:border-primary",
+          before: "checked:before:bg-primary",
+        },
+        secondary: {
+          background: "checked:bg-secondary",
+          border: "checked:border-secondary",
+          before: "checked:before:bg-secondary",
+        },
+        danger: {
+          background: "checked:bg-danger",
+          border: "checked:border-danger",
+          before: "checked:before:bg-danger",
+        },
+      },
+    },
+  },
   //============================================//
 };
 

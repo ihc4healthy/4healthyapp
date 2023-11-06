@@ -14,7 +14,7 @@ function ToggleButton({buttons, defaultSelected, setChoosed, cols}) {
         <div className={`toggle-button ${buttons.length < 4 ? 'flex': `grid grid-cols-${cols?cols:4}`} justify-center`}>
             {buttons.map((btn, i) =>
             <button type='button' key={`tbtn-btn-${i}`}
-                className={`flex-col btn-elevated items-center ${i==selected?'active':''}`}
+                className={`flex-col btn-elevated items-center ${i==selected?'active text-text-primary':'text-text-secondary'}`}
                 onClick={()=>{setSelected(i)}} title={btn.text} value={btn.value}
             >
                 {btn.imageSrc ?

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Button, Step, Stepper, Typography } from '@material-tailwind/react';
 import { DSidebar } from '../../components/Sidenav';
 import SelectHabit from '../../components/habit/SelectHabit';
-import { BookmarkIcon, CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import Input from '../../components/Input';
+import SelectSchedule from '../../components/habit/SelectSchedule';
+import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/solid';
 
 function NewHabit() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -16,15 +16,14 @@ function NewHabit() {
 
     const steps = ['Seleccionar hábito', 'Horario', 'Avanzado'];
     const stepsCont = [
-    <div className='flex flex-col gap-6'>
-        <Typography variant='h1'>¡Elige el hábito que deseas realizar!</Typography>
-        <SelectHabit/>
-        
+        <SelectHabit/>,
+        <SelectSchedule habitName={"AA"}/>,
         <>
+            <>
+            </>
+            <>
+            </>
         </>
-        <>
-        </>,
-    </div>,
     ];
 
   return (
@@ -47,18 +46,25 @@ function NewHabit() {
                 )}
             </Stepper>
             
-            <section className='steps-cont'>
+            <section className='steps-cont flex flex-col gap-6'>
                 {activeStep >= 0 && activeStep < stepsCont.length?
                     stepsCont[activeStep] : <></> }
             </section>
 
             <div className="mt-16 flex justify-between">
                 <Button onClick={handlePrev} disabled={isFirstStep}>
-                Prev
+                    Anterior
                 </Button>
-                <Button onClick={handleNext} disabled={isLastStep} color='primary'>
-                Next
-                </Button>
+                <div className='flex gap-2'>
+                    <Button onClick={handleNext} disabled={isFirstStep} color='primary'>
+                        <CheckIcon/>
+                        Guardar
+                    </Button>
+                    <Button onClick={handleNext} disabled={isLastStep} color='secondary'>
+                        <ArrowRightIcon/>
+                        Siguiente
+                    </Button>
+                </div>
             </div>
         </div>
     </div>
