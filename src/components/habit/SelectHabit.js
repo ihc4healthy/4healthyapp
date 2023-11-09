@@ -95,7 +95,7 @@ function SelectHabit() {
     <>
         <Typography variant='h1'>¡Elige el hábito que deseas realizar!</Typography>
 
-        {defaultHabits.map((ht, i)=><div key={`ht-${i}`}>
+        {defaultHabits.map((ht, i)=><div className='flex flex-col gap-3' key={`ht-${i}`}>
             <Typography variant='h3'>
                 {ht.type}
             </Typography>

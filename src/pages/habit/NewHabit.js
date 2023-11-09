@@ -19,14 +19,14 @@ function NewHabit() {
     const stepsCont = [
         <SelectHabit/>,
         <SelectSchedule habitName={"AA"}/>,
-        <RegisterGoal/>
+        <RegisterGoal habitName={"AA"}/>
     ];
 
   return (
     <div className='w-full h-full flex'>
         <DSidebar/>
         <div className="container py-4 px-8">
-            <Stepper className='mx-8 mb-12 w-[calc(100%-2rem)]'
+            <Stepper className='mx-8 mb-16 w-[calc(100%-2rem)]'
                 activeStep={activeStep}
                 isLastStep={(value) => setIsLastStep(value)}
                 isFirstStep={(value) => setIsFirstStep(value)}
@@ -42,7 +42,7 @@ function NewHabit() {
                 )}
             </Stepper>
             
-            <section className='steps-cont flex flex-col gap-6'>
+            <section className='steps-cont flex flex-col gap-8'>
                 {activeStep >= 0 && activeStep < stepsCont.length?
                     stepsCont[activeStep] : <></> }
             </section>
