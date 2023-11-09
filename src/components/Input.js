@@ -4,12 +4,14 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 const Input = ({label, type, placeholder, name, helpText,
                 id, color, disabled, required, readonly,
-                beforeInput, afterInput, value, setValue})=>{
-
+                beforeInput, afterInput, setValue, className,
+                min, max, step, value,
+                minLength, maxLength, multiple}) => {
     let inputClass = "input";
     if (['primary', 'secondary', 'danger'].includes(color)){
         inputClass += "-" + color;
     }
+    inputClass += className ? " " + className : "";
     
     const [toggleVisibility, setToggleVisibility] = useState({
         required:type=="password", isVisible: false, icon:<EyeIcon/>, inputType:type });
@@ -21,11 +23,16 @@ const Input = ({label, type, placeholder, name, helpText,
             <div className="flex w-full gap-x-4">
                 {beforeInput}
                 <input type={toggleVisibility.inputType} name={name} id={id}
-                    placeholder={placeholder ? placeholder :label}
+                    placeholder={placeholder ? placeholder : label}
+                    {...(value && {value: value})}
                     disabled={disabled} required={required} readOnly={readonly}
-                    value={value ? value : ""}
+                    min={min} max={max} step={step}
+                    minLength={minLength} maxLength={maxLength} multiple={multiple}
                     onInput={(event)=>{
-                        if (setValue) { setValue(event.target.value); }
+                        const val = event.target.value;
+                        if (min && val < min) { event.target.value = min }
+                        if (max && val > max) { event.target.value = max }
+                        if (setValue) { setValue(val); }
                     }}
                 />
                 {toggleVisibility.required ? 

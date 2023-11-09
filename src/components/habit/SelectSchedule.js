@@ -11,27 +11,32 @@ const Schedule = ({index, schedules, setSchedules})=>{
     const [daysChecked, setDaysChecked] = useState([false,false,false,false,false,false,false]);
     
     useEffect(()=>{
-        let schedule = {
-            start: startTime,
-            duration: duration,
-            days: daysChecked.map((d, i) => d ? i : undefined).filter(x => x)
-        };
-        schedules[index] = schedule;
-        setSchedules([...schedules]);
-        console.log(`editing ${index} (${schedule.start}) then ${schedules.length}`);
-    },[startTime, duration, daysChecked]);
+        schedules[index].start = startTime;
+        setSchedules(schedules);
+        console.log(`editing ${index} (${schedules[index].start})`);
+    },[startTime]);
+    useEffect(()=>{
+        schedules[index].duration = duration;
+        setSchedules(schedules);
+    },[duration]);
+    useEffect(()=>{
+        schedules[index].days = daysChecked.map((d, i) => d ? i : undefined).filter(x => x != undefined);
+        setSchedules(schedules);
+        console.log(`editing ${index} (${schedules[index].days})`);
+    },[daysChecked]);
     
     useEffect(()=>{
-        let schedule = {
-            start: schedules[index].start ? schedules[index].start : defaultSchedule.start,
-            duration: schedules[index].duration ? schedules[index].duration : defaultSchedule.duration,
-            days: schedules[index].days ? schedules[index].days : [],
-        };
+        let schedule = schedules[index];
+        if (!schedule.start) { schedule.start = defaultSchedule.start; }
+        if (!schedule.duration) { schedule.start = defaultSchedule.duration; }
+        if (!schedule.days) { schedule.days = defaultSchedule.days; }
+        
         daysChecked.fill(false);
         schedule.days.forEach(i=>daysChecked[i]=true);
         setStartTime(schedule.start);
         setDuration(schedule.duration);
         setDaysChecked(daysChecked);
+        // console.log('index change ' + index);
     }, [schedules.length]);
 
     return (<>
@@ -119,7 +124,7 @@ const SelectSchedule = ({habitName}) => {
             <div>
                 <Typography variant='h4'>Recordatorios</Typography>
                 <List className="flex-row text-text-secondary">
-                    {reminders.map((tb, i)=><>
+                    {reminders.map((tb, i)=>
                         <ListItem className="p-0 w-fit" key={`rmd-${i}`}>
                             <Checkbox color="secondary"
                                 className="hover:before:opacity-0"
@@ -132,7 +137,7 @@ const SelectSchedule = ({habitName}) => {
                                 ripple={false}
                             />
                         </ListItem>
-                    </>)}
+                    )}
                 </List>
             </div>
         </>
