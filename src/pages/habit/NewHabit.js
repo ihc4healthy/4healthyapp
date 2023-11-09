@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Step, Stepper, Typography } from '@material-tailwind/react';
+import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { DSidebar } from '../../components/Sidenav';
 import SelectHabit from '../../components/habit/SelectHabit';
 import SelectSchedule from '../../components/habit/SelectSchedule';
-import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/solid';
+import RegisterGoal from '../../components/habit/RegisterGoal';
 
 function NewHabit() {
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [isLastStep, setIsLastStep] = React.useState(false);
-    const [isFirstStep, setIsFirstStep] = React.useState(false);
+    const [activeStep, setActiveStep] = useState(0);
+    const [isLastStep, setIsLastStep] = useState(false);
+    const [isFirstStep, setIsFirstStep] = useState(false);
     
     const handleNext = () => {!isLastStep && setActiveStep((cur) => cur + 1)};
     const handlePrev = () => {!isFirstStep && setActiveStep((cur) => cur - 1)};
@@ -18,12 +19,7 @@ function NewHabit() {
     const stepsCont = [
         <SelectHabit/>,
         <SelectSchedule habitName={"AA"}/>,
-        <>
-            <>
-            </>
-            <>
-            </>
-        </>
+        <RegisterGoal/>
     ];
 
   return (
