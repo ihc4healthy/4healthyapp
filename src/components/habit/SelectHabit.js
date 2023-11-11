@@ -64,7 +64,6 @@ function SelectHabit() {
 
     const [selected, setSelected] = useState(selectedDefault);
     const [open, setOpen] = useState(false);
-    const [usingDefault, setUsingDefault] = useState(true);
     const [pHabitText, setPHabitText] = useState("");
     const [pHabitIcon, setPHabitIcon] = useState(defaultIcons[0]);
     const [habitInput, setHabitInput] = useState({helper:"", color:""});
@@ -80,7 +79,6 @@ function SelectHabit() {
     const handleOpen = ()=>setOpen(true);
     const handleSave = ()=>{
         if (pHabitText.length > 2 && regex.oneLetter.test(pHabitText)) {
-            setUsingDefault(false);
             handleClose();
             setSelected({...selected, name:pHabitText, icon:pHabitIcon})
         }
@@ -90,6 +88,17 @@ function SelectHabit() {
     };
 
     const FAIcon = ({iconName})=><FontAwesomeIcon icon={`fa-solid fa-${iconName}`} />;
+    const ChipButton = ({name, icon, id, className, key})=>
+        <button {...(key && {key:`h-${key}`})}
+            className={`${className} btn-chip ${selected.name == name ? 'active':''}`}
+            onClick={()=>{
+                if(setSelected){
+                    setSelected({id:id, name:name, icon:icon});
+                }
+            }}
+        >
+            {icon} {name}
+        </button>;
     
     return (
     <>
@@ -101,25 +110,8 @@ function SelectHabit() {
             </Typography>
             <div className="flex gap-2">
                 {ht.list.map((h,j)=>
-                    <Chip variant="ghost"
-                        className="rounded-full flex items-center"
-                        key={`h-${i}-${j}`}
-                        value={h.name}
-                        icon={h.icon}
-                        // open={true}
-                        action = {
-                            <Radio name={radioName}
-                                color="secondary"
-                                containerProps={{ className: "p-0 ml-2", }}
-                                checked={usingDefault && selected.name == h.name}
-                                onChange={(e)=>{
-                                    if(e.target.value && setSelected){
-                                        setSelected({id:[i,j], name:h.name, icon:h.icon});
-                                        setUsingDefault(true);
-                                    }
-                            }}/>
-                        }
-                    />
+                <ChipButton key={`${i}-${j}`} id={[i,j]}
+                    name={h.name} icon={h.icon}/>
                 )}
             </div>
         </div>)}
@@ -129,20 +121,13 @@ function SelectHabit() {
         <div>
             <Typography variant='h3'>Personalizado</Typography>
             <div className={`${open?"hidden":"flex"} items-center gap-2`}>
-                <div className={usingDefault?"hidden":"flex gap-2"}>
-                    <Radio name={radioName}
-                        containerProps={{ className: "p-0 ml-2", }}
-                        checked={!usingDefault}
-                        color="secondary"
-                        readOnly
-                    />
-                    <h3>{selected.name}</h3>
-                    <FAIcon iconName={pHabitIcon}/>
-                </div>
+                <ChipButton id={0} className={pHabitText === "" ? 'hidden' :
+                                    selected.name === pHabitText ? 'active': ''}
+                    name={pHabitText} icon={<FAIcon iconName={pHabitIcon}/>}/>
                 <Button variant='text'
                     hidden={open} onClick={handleOpen}>
                     {
-                        usingDefault?
+                        pHabitText === ""?
                         <><PlusIcon/> Crear hábito diferente</>
                         : <><PencilSquareIcon/></>
                     }
