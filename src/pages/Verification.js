@@ -8,10 +8,10 @@ import '../css/styles.css';
 function Verification() {
     const [code, setCode] = useState('');
     const [codeComp, setCodeComp] = useState({color:"primary", helper:"Por favor, complete el campo de correo electrónico", isReady:false});
-    const [canSignin, setCanSignin] = useState(false);
+    const [canIn, setCanIn] = useState(false);
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const emailFromQuery = searchParams.get('email');
+    const email = searchParams.get('email');
     const validCodes = ['1234', '5678', '9876', '4321'];
 
     
@@ -44,7 +44,7 @@ function Verification() {
     }, [code]);
 
     useEffect(()=>{
-        setCanSignin(codeComp.isReady);
+        setCanIn(codeComp.isReady);
     },[codeComp.isReady]);
 
     return (
@@ -56,7 +56,7 @@ function Verification() {
                         <h1 className="restore-title">Introducir tu código de verificación</h1>
                         <br />
                         <p className="restore-description">
-                            Tu código de verificación ha sido enviado a {emailFromQuery}. Por favor, introduzca el código recibido.
+                            Tu código de verificación ha sido enviado a {email}. Por favor, introduzca el código recibido.
                         </p>
                         <br />
                         <div className="contact-support">
@@ -72,8 +72,8 @@ function Verification() {
                     <       Input label="Código de verificación" helpText={codeComp.helper}
                             type="text" color={codeComp.color} setValue={setCode}/>
 
-                            <Link to="/Confirm">
-                                <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
+                            <Link to={`/Confirm?email=${email}`}>
+                                <button className='btn-primary w-full' type='submit' disabled={!canIn}>
                                     PRÓXIMO
                                 </button>
                             </Link>
