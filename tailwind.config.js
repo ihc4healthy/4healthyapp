@@ -49,8 +49,7 @@ module.exports = withMT({
    ],
   theme: {
     fontFamily: {
-      sans: ['Poppins', 'sans-serif'],
-      body: ['Inter', 'Poppins', 'sans-serif'],
+      sans: ['Inter', 'Poppins', 'sans-serif'],
     },
     extend: {
       colors: colors,

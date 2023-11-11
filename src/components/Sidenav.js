@@ -47,7 +47,7 @@ export const DSidebar = ()=> {
 
   return (
     <Card className="sticky top-0 h-[calc(100vh-1rem)] w-full max-w-[20rem] p-4
-                    shadow-xl shadow-blue-gray-900/5">
+                    flex flex-col shadow-xl shadow-blue-gray-900/5">
       <Header/>
 
       <div className="flex py-4 items-center">
@@ -57,7 +57,7 @@ export const DSidebar = ()=> {
         </Typography>
       </div>
 
-      <List>
+      <List className="font-heading">
         {tabs.map((tab, i) =>
         <Link href={tab.url} className="text-text-primary" key={`li-${i}`}>
           <ListItem onClick={tab.onClick} selected={selected === i}>
@@ -71,7 +71,9 @@ export const DSidebar = ()=> {
         </Link>
         )}
       </List>
-
+      
+      <div class="grow"></div>
+      
       <Footer showLogo={false}/>
     </Card>
   );

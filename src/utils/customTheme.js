@@ -35,11 +35,39 @@ const btnFillGrad = {
 };
 
 const customTheme = {
+  typography: {
+    styles: {
+      variants: {
+        h1: {
+          fontFamily: "font-heading",
+          fontWeight: "font-bold",
+        },
+        h2: {
+          fontFamily: "font-heading",
+        },
+        h3: {
+          fontFamily: "font-heading",
+        },
+        h4: {
+          fontFamily: "font-heading",
+        },
+        h5: {
+          fontFamily: "font-heading",
+        },
+      },
+    },
+  },
+  //============================================//
   button: {
     valid: {
       colors: validColors,
     },
     styles: {
+      base: {
+        initial: {
+          fontFamily: "font-heading",
+        },
+      },
       variants: {
         filled: { ...btnFillGrad },
         gradient: { ...btnFillGrad },
@@ -94,7 +122,6 @@ const customTheme = {
     },
     styles: {
       colors: {
-
         primary: {
           background: "checked:bg-primary",
           border: "checked:border-primary",
@@ -109,6 +136,21 @@ const customTheme = {
           background: "checked:bg-danger",
           border: "checked:border-danger",
           before: "checked:before:bg-danger",
+        },
+      },
+    },
+  },
+  //============================================//
+  chip: {
+    styles: {
+      base: {
+        chip: {
+          fontWeight: "font-sans",
+        },
+        icon: {
+          position: "relative",
+          top: "",
+          translate: "",
         },
       },
     },
