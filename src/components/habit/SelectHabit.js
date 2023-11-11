@@ -3,40 +3,39 @@ import { Button, ButtonGroup, Chip, Popover, PopoverContent, PopoverHandler, Rad
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBaseball, faBasketball, faBed, faBicycle, faBook, faBookOpenReader, faBowlingBall, faBriefcase, faBullseye, faChalkboardUser, faCloud, faCow, faDragon, faDumbbell, faFaceSmileBeam, faFeather, faFishFins, faFootball, faFutbol, faGlassWater, faGlasses, faGolfBallTee, faGraduationCap, faHandshakeSimple, faHeart, faKeyboard, faLanguage, faMap, faMusic, faPalette, faPaw, faPersonRays, faPersonRunning, faPersonSkating, faPersonSwimming, faPersonWalking, faTicket, faTooth, faVolleyball, faWheelchairMove } from '@fortawesome/free-solid-svg-icons';
-import { CheckIcon, FaceSmileIcon, PencilSquareIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import Input from '../Input';
+import { CheckIcon, PencilSquareIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { regex } from '../../utils/regexs';
+import Input from '../Input';
 import ToggleButton from '../ToggleButton';
 
-function SelectHabit() {
-    const radioName = "habits-opts";
+function SelectHabit({setEnableNext}) {
     const defaultHabits = [
         {
             type: "Salud general",
             list: [
-                {icon: <FontAwesomeIcon icon={faBed} />, name:"Dormir"},
-                {icon: <FontAwesomeIcon icon={faCloud} />, name:"Meditar"},
-                {icon: <FontAwesomeIcon icon={faGlassWater} />, name:"Beber agua"},
-                {icon: <FontAwesomeIcon icon={faTooth} />, name:"Usar hilo dental"},
+                {id: 1, icon: <FontAwesomeIcon icon={faBed} />, name:"Dormir"},
+                {id: 2, icon: <FontAwesomeIcon icon={faCloud} />, name:"Meditar"},
+                {id: 3, icon: <FontAwesomeIcon icon={faGlassWater} />, name:"Beber agua"},
+                {id: 4, icon: <FontAwesomeIcon icon={faTooth} />, name:"Usar hilo dental"},
             ]
         },
         {
             type: "Ejercicios",
             list: [
-                {icon: <FontAwesomeIcon icon={faPersonRunning} />, name:"correr"},
-                {icon: <FontAwesomeIcon icon={faBicycle} />, name:"manejar bicicleta"},
-                {icon: <FontAwesomeIcon icon={faPersonSkating} />, name:"Usar patines"},
-                {icon: <FontAwesomeIcon icon={faPersonWalking} />, name:"caminar"},
-                {icon: <FontAwesomeIcon icon={faPersonSwimming} />, name:"Nadar"},
+                {id: 5, icon: <FontAwesomeIcon icon={faPersonRunning} />, name:"correr"},
+                {id: 6, icon: <FontAwesomeIcon icon={faBicycle} />, name:"manejar bicicleta"},
+                {id: 7, icon: <FontAwesomeIcon icon={faPersonSkating} />, name:"Usar patines"},
+                {id: 8, icon: <FontAwesomeIcon icon={faPersonWalking} />, name:"caminar"},
+                {id: 9, icon: <FontAwesomeIcon icon={faPersonSwimming} />, name:"Nadar"},
             ]
         },
         {
             type: "Crecimiento personal",
             list: [
-                {icon: <FontAwesomeIcon icon={faBookOpenReader} />, name:"Leer"},
-                {icon: <FontAwesomeIcon icon={faGraduationCap} />, name:"Estudiar"},
-                {icon: <FontAwesomeIcon icon={faBook} />, name:"Escribir un diario"},
-                {icon: <FontAwesomeIcon icon={faLanguage} />, name:"practicar nuevo idioma"},
+                {id: 10, icon: <FontAwesomeIcon icon={faBookOpenReader} />, name:"Leer"},
+                {id: 11, icon: <FontAwesomeIcon icon={faGraduationCap} />, name:"Estudiar"},
+                {id: 12, icon: <FontAwesomeIcon icon={faBook} />, name:"Escribir un diario"},
+                {id: 13, icon: <FontAwesomeIcon icon={faLanguage} />, name:"practicar nuevo idioma"},
             ]
         },
     ];
@@ -70,6 +69,10 @@ function SelectHabit() {
     
     useEffect(()=>{
         // alert(selected.name)
+        if (setEnableNext) {
+            // console.log(selected, selected.id >= 0 && selected.name !== "");
+            setEnableNext(selected.id >= 0 && selected.name !== "");
+        }
     },[selected]);
     useEffect(()=>{
         setHabitInput({helper:"", color:""});
@@ -80,7 +83,7 @@ function SelectHabit() {
     const handleSave = ()=>{
         if (pHabitText.length > 2 && regex.oneLetter.test(pHabitText)) {
             handleClose();
-            setSelected({...selected, name:pHabitText, icon:pHabitIcon})
+            setSelected({...selected, id:0, name:pHabitText, icon:pHabitIcon})
         }
         else {
             setHabitInput({helper:"Usar mínimo 2 letras", color:"danger"});
@@ -88,9 +91,8 @@ function SelectHabit() {
     };
 
     const FAIcon = ({iconName})=><FontAwesomeIcon icon={`fa-solid fa-${iconName}`} />;
-    const ChipButton = ({name, icon, id, className, key})=>
-        <button {...(key && {key:`h-${key}`})}
-            className={`${className} btn-chip ${selected.name == name ? 'active':''}`}
+    const ChipButton = ({name, icon, id, className})=>
+        <button className={`${className} btn-chip ${selected.name == name ? 'active':''}`}
             onClick={()=>{
                 if(setSelected){
                     setSelected({id:id, name:name, icon:icon});
@@ -110,7 +112,7 @@ function SelectHabit() {
             </Typography>
             <div className="flex gap-2">
                 {ht.list.map((h,j)=>
-                <ChipButton key={`${i}-${j}`} id={[i,j]}
+                <ChipButton key={`h-${i}-${j}`} id={h.id}
                     name={h.name} icon={h.icon}/>
                 )}
             </div>
