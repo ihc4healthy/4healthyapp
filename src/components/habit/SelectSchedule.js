@@ -1,43 +1,44 @@
+import React, { useEffect, useState } from 'react';
 import { Button, Checkbox, List, ListItem, Typography } from '@material-tailwind/react';
-import React, { useEffect, useState } from 'react'
-import Input from '../Input';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid';
+import Input from '../Input';
+import { useCallback } from 'react';
 
-const Schedule = ({index, schedules, setSchedules})=>{
+const Schedule = ({index, schedule, setSchedule, removeSchedule})=>{
     const days = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
-    const defaultSchedule = {start: "07:00", duration: "00:30", days:[0,2,3]};
-    const [startTime, setStartTime] = useState(defaultSchedule.start);
-    const [duration, setDuration] = useState(defaultSchedule.duration);
-    const [daysChecked, setDaysChecked] = useState([false,false,false,false,false,false,false]);
+    const getDefaultDaysCheched = ()=>{
+        let arr = [false,false,false,false,false,false,false];
+        schedule?.days?.forEach(i=>arr[i]=true);
+        return arr;
+    };
+    
+    const [startTime, setStartTime] = useState(schedule.start ?? "07:00");
+    const [duration, setDuration] = useState(schedule.duration ?? "00:30");
+    const [daysChecked, setDaysChecked] = useState( getDefaultDaysCheched() );
     
     useEffect(()=>{
-        schedules[index].start = startTime;
-        setSchedules(schedules);
-        console.log(`editing ${index} (${schedules[index].start})`);
+        schedule.start = startTime;
+        setSchedule(schedule);
+        console.log(`editing ${index} (${schedule.start})`);
     },[startTime]);
     useEffect(()=>{
-        schedules[index].duration = duration;
-        setSchedules(schedules);
+        schedule.duration = duration;
+        setSchedule(schedule);
     },[duration]);
     useEffect(()=>{
-        schedules[index].days = daysChecked.map((d, i) => d ? i : undefined).filter(x => x != undefined);
-        setSchedules(schedules);
-        console.log(`editing ${index} (${schedules[index].days})`);
+        schedule.days = daysChecked.map((d, i) => d ? i : undefined).filter(x => x != undefined);
+        setSchedule(schedule);
+        console.log(`editing ${index} (${schedule.days})`);
     },[daysChecked]);
     
     useEffect(()=>{
-        let schedule = schedules[index];
-        if (!schedule.start) { schedule.start = defaultSchedule.start; }
-        if (!schedule.duration) { schedule.start = defaultSchedule.duration; }
-        if (!schedule.days) { schedule.days = defaultSchedule.days; }
-        
-        daysChecked.fill(false);
-        schedule.days.forEach(i=>daysChecked[i]=true);
         setStartTime(schedule.start);
         setDuration(schedule.duration);
+        daysChecked.fill(false);
+        schedule.days.forEach(i=>daysChecked[i]=true);
         setDaysChecked(daysChecked);
-        // console.log('index change ' + index);
-    }, [schedules.length]);
+        console.log('index change ' + index + '... ' + schedule.start + ' ' + schedule.days)
+    }, [schedule]);
 
     return (<>
         <div className='flex gap-2 items-center text-text-secondary'>
@@ -53,7 +54,7 @@ const Schedule = ({index, schedules, setSchedules})=>{
             <div className='flex flex-col'>
                 <Typography variant='small'>Días</Typography>
                 <List className="flex-row">
-                    {days.map((d,i)=>
+                    {days.map((d, i)=>
                     <ListItem className="p-0 w-fit" key={`d-${i}`}>
                         <Checkbox color="secondary"
                             className="hover:before:opacity-0"
@@ -74,10 +75,8 @@ const Schedule = ({index, schedules, setSchedules})=>{
                     </ListItem>)}
                 </List>
             </div>
-            <Button disabled={index==0} onClick={()=>{
-                setSchedules(schedules.filter((item, i) => i !== index));
-                console.log("Removing " + index);
-            }}>
+            <Button disabled={index==0} onClick={()=>{removeSchedule(); 
+    }}>
                 <MinusIcon/>
             </Button>
         </div>
@@ -92,7 +91,8 @@ const SelectSchedule = ({habitName}) => {
         {timeBefore: 60*60, name: "1 hora antes"},
     ];
 
-    const [schedules, setSchedules] = useState([]);
+    const defaultSchedule = {start: "07:00", duration: "00:30", days:[5]};
+    const [schedules, setSchedules] = useState([defaultSchedule]);
     useEffect(()=>{
         schedules.forEach(element => {
             console.log(`sch ${element.start}`)
@@ -107,8 +107,15 @@ const SelectSchedule = ({habitName}) => {
                 <Typography variant='h4'>Horarios</Typography>
                 {schedules.map((s, i)=>
                     <Schedule index={i} key={`sch-${i}`}
-                        setSchedules={setSchedules}
-                        schedules={schedules}
+                        schedule={s}
+                        setSchedule={()=>{
+                            schedules[i] = s;
+                            setSchedules(schedules)
+                        }}
+                        removeSchedule={()=>{
+                            setSchedules(schedules.filter((item, j) => j !== i));
+                            console.log("Removing " + i);
+                        }}
                     />
                 )}
                 <Button className='w-64' variant='text'
