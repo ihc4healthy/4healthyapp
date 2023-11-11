@@ -72,7 +72,7 @@ export const DSidebar = ()=> {
         )}
       </List>
       
-      <div class="grow"></div>
+      <div className="grow"></div>
       
       <Footer showLogo={false}/>
     </Card>
