@@ -10,17 +10,30 @@ function NewHabit() {
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
     const [isFirstStep, setIsFirstStep] = useState(false);
+    const [nextEnabled, setNextEnabled] = useState(false);
     
     const handleNext = () => {!isLastStep && setActiveStep((cur) => cur + 1)};
     const handlePrev = () => {!isFirstStep && setActiveStep((cur) => cur - 1)};
-    
+    const handleChangeStep = (step) => {
+        if (nextEnabled) {
+            setActiveStep(step);
+        }
+    };
+    const handleSave = () => {
+    }
 
     const steps = ['Seleccionar hábito', 'Horario', 'Avanzado'];
     const stepsCont = [
-        <SelectHabit/>,
-        <SelectSchedule habitName={"AA"}/>,
+        <SelectHabit setEnableNext={(enabled) => setNextEnabled(activeStep===0 && enabled)}/>,
+        <SelectSchedule habitName={"AA"} setEnableNext={(enabled) => setNextEnabled(activeStep===1 && enabled)}/>,
         <RegisterGoal habitName={"AA"}/>
     ];
+    useEffect(()=>{
+        setNextEnabled(true);
+    }, [nextEnabled==2]);
+    useEffect(()=>{
+        setNextEnabled(false);
+    }, []);
 
   return (
     <div className='w-full h-full flex'>
@@ -32,7 +45,7 @@ function NewHabit() {
                 isFirstStep={(value) => setIsFirstStep(value)}
             >
                 {steps.map((s,i)=>
-                    <Step onClick={() => setActiveStep(i)} key={`step-${i}`}>
+                    <Step key={`step-${i}`} onClick={() => handleChangeStep(i)}>
                         <span> {i+1} </span>
                         <Typography variant="h6"
                         color={activeStep === 0 ? "blue-gray" : "gray"}
@@ -52,11 +65,11 @@ function NewHabit() {
                     Anterior
                 </Button>
                 <div className='flex gap-2'>
-                    <Button onClick={handleNext} disabled={isFirstStep} color='primary'>
+                    <Button onClick={handleSave} disabled={isFirstStep || !nextEnabled} color='primary'>
                         <CheckIcon/>
                         Guardar
                     </Button>
-                    <Button onClick={handleNext} disabled={isLastStep} color='secondary'>
+                    <Button onClick={handleNext} disabled={isLastStep || !nextEnabled} color='secondary'>
                         <ArrowRightIcon/>
                         Siguiente
                     </Button>

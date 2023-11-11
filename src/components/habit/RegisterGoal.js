@@ -1,37 +1,97 @@
 import React, { useEffect, useState } from 'react'
-import { Typography } from '@material-tailwind/react'
+import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Option, Select, Slider, Typography } from '@material-tailwind/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import Input from '../Input'
 import ToggleButton from '../ToggleButton'
+import { CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 function RegisterGoal({habitName}) {
-    const [goalName, setGoalName] = useState("");
-    const [goalDescription, setGoalDescription] = useState("");
+    const difficulty = {EASY: "EASY", MEDIUM: "MEDIUM", HARD: "HARD"};
+    const defaultGoal = {id: 0, name: "general", description: ""};
+    const [goals, setGoals] = useState([
+        {id: 1, name: "Reducir 15 Kg", description: "lorem ipsum"},
+        {id: 2, name: "Ganar músculo", description: "marcar abdominales"},
+    ]);
+    
+    const [open, setOpen] = useState(false);
+    const [selectedGoal, setSelectedGoal] = useState(defaultGoal);
+    const [newGoal, setNewGoal] = useState({id: -1, name: "", description: "", error: ""});
+    const [goalDifficulty, setGoalDifficulty] = useState(difficulty.MEDIUM);
     const [goalPercentage, setGoalPercentage] = useState(10);
-    const [goalDifficulty, setGoalDifficulty] = useState("");
     // const [advancedData, setAdvancedData] = useState({
     // });
+    const handleOpen = () => setOpen(!open);
+    const handleNew = () => {
+        if (newGoal.error === "") {
+            setOpen(!open);
+            setGoals([...goals, newGoal]);
+            setSelectedGoal(newGoal);
+        }
+    };
+    useEffect(() => {
+        newGoal.error = newGoal.name.length < 3 ? "Mínimo deben ser 3 caracteres" : "";
+    }, [newGoal.name]);
 
     return (<>
         <Typography variant='h3'>Opciones Power para {habitName}</Typography>
         
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-4'>
+
             <Typography variant='h4'>Objetivo a cumplir</Typography>
-            <div className='flex gap-4'>
-                <Input label="Nombre" setValue={setGoalName} value={goalName}/>
-                <Input label="Descripción" setValue={setGoalDescription} className="w-full"/>
-            </div>
-            <div className='flex gap-2'>
-                <p>Para lograr el objetivo,
-                    <br/>cada vez que realizo la actividad,
-                    <br/>espero acumular:</p>
-                <div>
-                    <Input label="Porcentaje" placeholder="%"
-                        setValue={setGoalPercentage}
-                        type="number" afterInput={<>%</>}
-                        min={1} max={100} step={1}
-                    />
+            
+            <div className='flex gap-8 items-center'>
+                <div className='flex gap-4 items-center'>
+                    <div className='w-96'>
+                        <Select variant="standard" label="Objetivos registrados" value={selectedGoal.name}>
+                            <Option onClick={()=>{setSelectedGoal(defaultGoal)}}>
+                                General
+                            </Option>
+                            {goals.map((g, i) =>
+                                <Option value={g.name} key={`goal-${i}`} onClick={()=>{setSelectedGoal(g)}}>
+                                    {g.name}
+                                </Option>
+                            )}
+                        </Select>
+                        <Typography className='mt-2 text-text-secondary'>{selectedGoal.description}</Typography>
+                    </div>
+                    <Button onClick={handleOpen} className='w-48'><PlusIcon/> Nuevo objetivo</Button>
+                </div>
+                
+                <Dialog open={open} handler={handleOpen}>
+                    <DialogHeader>Nuevo objetivo</DialogHeader>
+                    <DialogBody className='flex gap-4'>
+                        <Input label="Nombre"
+                            value={newGoal.name}
+                            setValue={(name) => setNewGoal({...newGoal, name: name})}
+                            helpText={newGoal.error} />
+                        <Input label="Descripción" className="w-full"
+                            value={newGoal.description}
+                            setValue={(desc) => setNewGoal({...newGoal, description: desc})}/>
+                    </DialogBody>
+                    <DialogFooter className='text-text-primary'>
+                        <Button className="mr-1" variant="text" onClick={handleOpen}>
+                            <XMarkIcon/> Cancelar
+                        </Button>
+                        <Button variant="text" onClick={handleNew} disabled={newGoal.error!==""}>
+                            <CheckIcon/> Agregar
+                        </Button>
+                    </DialogFooter>
+                </Dialog>
+
+                <div hidden={selectedGoal.name === defaultGoal.name}>
+                    <p>Cada vez que realizo la actividad, espero acumular:</p>
+                    <div className="w-64">
+                        <Input label="Porcentaje del objetivo" placeholder="%"
+                            value={goalPercentage}
+                            setValue={setGoalPercentage}
+                            type="number" afterInput={<>%</>}
+                            min={1} max={100} step={1}
+                        />
+                        <Slider size="sm" value={goalPercentage}
+                            onChange={(e)=>{ setGoalPercentage(Math.round(e.target.value)) }}
+                            className="text-secondary" barClassName="bg-secondary"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,9 +101,9 @@ function RegisterGoal({habitName}) {
             <div className='flex gap-2'>
                 <p>Creo que la actividad tiene una dificultad:</p>
                 <ToggleButton buttons={[
-                        {icon: <FontAwesomeIcon icon={faMoon}/>, text:"fácil", value: "EASY"},
-                        {icon: <FontAwesomeIcon icon={faCircle}/>, text:"medio", value: "MEDIUM"},
-                        {icon: <FontAwesomeIcon icon={faSun}/>, text:"difícil", value: "HARD"},
+                        {icon: <FontAwesomeIcon icon={faMoon}/>, text:"fácil", value: difficulty.EASY },
+                        {icon: <FontAwesomeIcon icon={faCircle}/>, text:"media", value: difficulty.MEDIUM},
+                        {icon: <FontAwesomeIcon icon={faSun}/>, text:"difícil", value: difficulty.HARD},
                     ]}
                     defaultSelected={1} setChoosed={setGoalDifficulty}/>
             </div>
