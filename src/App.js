@@ -33,9 +33,9 @@ function App() {
         <Route path="/verification" element={<Verification/>}/>
         <Route path="/confirm" element={<Confirm/>}/>
         <Route path="/habits">
-          <Route path='' element={<HabitsList/>}/>
           <Route path='new' element={<NewHabit/>}/>
         </Route>
+        <Route path='/today' element={<HabitsList/>}/>
       </Routes>
     </Router>
   );

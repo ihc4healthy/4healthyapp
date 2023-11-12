@@ -18,7 +18,7 @@ export const DSidebar = ()=> {
   const tabs = [
     {
       icon: <PresentationChartBarIcon className="h-5 w-5" />,
-      text: "HOY", url: "#",
+      text: "HOY", url: "/today",
     },
     {
       icon: <ShoppingBagIcon className="h-5 w-5" />,
@@ -58,7 +58,7 @@ export const DSidebar = ()=> {
 
       <List className="font-heading">
         {tabs.map((tab, i) =>
-        <Link href={tab.url} className="text-text-primary" key={`li-${i}`}>
+        <Link to={tab.url} className="text-text-primary" key={`li-${i}`}>
           <ListItem onClick={tab.onClick} selected={getFirstRoute(tab.url) == getFirstRoute(location.pathname)}>
             <ListItemPrefix>{tab.icon}</ListItemPrefix>
             {tab.text}
