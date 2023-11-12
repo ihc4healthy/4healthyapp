@@ -83,7 +83,7 @@ function Login() {
                             type="password" color={passwordComp.color} setValue={setPassword}/>
                             <a href='#/restore' className='text-secondary'>¿Has olvidado tu contraseña?</a>
 
-                        <p>¿Aun no eres parte de 4Healty? <a href='#/' className='text-secondary'>Únete</a></p>
+                        <p>¿Aun no eres parte de 4Healty? <Link to="/" className='text-secondary'>Únete</Link></p>
 
                         <Link to="/logros">
                             <button className='btn-primary w-full' type='submit' disabled={!canLogin}>

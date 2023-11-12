@@ -108,7 +108,7 @@ function Signup() {
                     <Input label="Contraseña" placeholder="******" helpText={passwordComp.helper}
                         type="password" color={passwordComp.color} setValue={setPassword}/>
 
-                    <p>¿Ya eres parte de 4Healty? <a href='#/signin' className='text-secondary-dark'>Ingresa</a></p>
+                    <p>¿Ya eres parte de 4Healty? <Link to="/login" className='text-secondary-dark'>Ingresa</Link></p>
 
                     <Link to="/welcome">
                         <button className='btn-primary w-full' type='submit' disabled={!canSignup}>
