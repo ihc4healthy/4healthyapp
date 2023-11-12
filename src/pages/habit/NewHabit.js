@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Button, Step, Stepper, Typography } from '@material-tailwind/react';
 import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { DSidebar } from '../../components/Sidenav';
-import SelectHabit from '../../components/habit/SelectHabit';
-import SelectSchedule from '../../components/habit/SelectSchedule';
-import RegisterGoal from '../../components/habit/RegisterGoal';
+import SelectHabit, { selectedDefault } from '../../components/habit/SelectHabit';
+import SelectSchedule, { defaultSchedule } from '../../components/habit/SelectSchedule';
+import RegisterGoal, { defaultAdvanced } from '../../components/habit/RegisterGoal';
 
 function NewHabit() {
+    const [habit, setHabit] = useState({
+        selectedHabit: selectedDefault,
+        schedules: [defaultSchedule],
+        reminders: [],
+        goal: defaultAdvanced
+    });
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
     const [isFirstStep, setIsFirstStep] = useState(false);
@@ -20,14 +26,37 @@ function NewHabit() {
         }
     };
     const handleSave = () => {
-    }
+        if (!isFirstStep && nextEnabled) {
+            if (habit.selectedHabit.id === -1) {
+                habit.selectedHabit.name = habit.selectedHabit.name.trim();
+                console.log("registering habit", habit.selectedHabit);
+            };
+            if (habit.goal.goal.id === -1) {
+                habit.goal.goal.name = habit.goal.goal.name.trim();
+                habit.goal.goal.description = habit.goal.goal.description.trim();
+                console.log("registering goal", habit.goal.goal);
+            };
+            console.log('saving', habit);
+        }
+    };
 
     const steps = ['Seleccionar hábito', 'Horario', 'Avanzado'];
     const stepsCont = [
-        <SelectHabit setEnableNext={(enabled) => setNextEnabled(activeStep===0 && enabled)}/>,
-        <SelectSchedule habitName={"AA"} setEnableNext={(enabled) => setNextEnabled(activeStep===1 && enabled)}/>,
-        <RegisterGoal habitName={"AA"}/>
+        <SelectHabit
+            baseHabit={habit.selectedHabit}
+            saveHabit={(h) => setHabit({...habit, selectedHabit: h}) }
+            setEnableNext={(enabled) => setNextEnabled(activeStep===0 && enabled)}
+        />,
+        <SelectSchedule habitName={habit.selectedHabit.name}
+            saveSchedule={(schedules) => setHabit({...habit, schedules: schedules}) }
+            saveReminders={(reminders) => setHabit({...habit, reminders: reminders}) }
+            setEnableNext={(enabled) => setNextEnabled(activeStep===1 && enabled)}
+        />,
+        <RegisterGoal habitName={habit.selectedHabit.name}
+            saveGoal={(g) => setHabit({...habit, goal:g}) }
+        />
     ];
+
     useEffect(()=>{
         setNextEnabled(true);
     }, [nextEnabled==2]);

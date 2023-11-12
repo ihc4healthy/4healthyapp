@@ -6,9 +6,11 @@ import Input from '../Input'
 import ToggleButton from '../ToggleButton'
 import { CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
-function RegisterGoal({habitName}) {
-    const difficulty = {EASY: "EASY", MEDIUM: "MEDIUM", HARD: "HARD"};
-    const defaultGoal = {id: 0, name: "general", description: ""};
+const goalDifficulties = {EASY: "EASY", MEDIUM: "MEDIUM", HARD: "HARD"};
+const defaultGoal = {id: 0, name: "general", description: ""};
+const defaultAdvanced = {goal: defaultGoal, difficulty: goalDifficulties.MEDIUM, goalPercentage: 10};
+
+function RegisterGoal({habitName, saveGoal}) {
     const [goals, setGoals] = useState([
         {id: 1, name: "Reducir 15 Kg", description: "lorem ipsum"},
         {id: 2, name: "Ganar músculo", description: "marcar abdominales"},
@@ -17,10 +19,13 @@ function RegisterGoal({habitName}) {
     const [open, setOpen] = useState(false);
     const [selectedGoal, setSelectedGoal] = useState(defaultGoal);
     const [newGoal, setNewGoal] = useState({id: -1, name: "", description: "", error: ""});
-    const [goalDifficulty, setGoalDifficulty] = useState(difficulty.MEDIUM);
+
+    const [goalDifficulty, setGoalDifficulty] = useState(goalDifficulties.MEDIUM);
     const [goalPercentage, setGoalPercentage] = useState(10);
-    // const [advancedData, setAdvancedData] = useState({
-    // });
+    const [advancedData, setAdvancedData] = useState({
+        goal: defaultGoal, difficulty: goalDifficulty, goalPercentage: goalPercentage
+    });
+
     const handleOpen = () => setOpen(!open);
     const handleNew = () => {
         if (newGoal.error === "") {
@@ -29,9 +34,23 @@ function RegisterGoal({habitName}) {
             setSelectedGoal(newGoal);
         }
     };
+
     useEffect(() => {
         newGoal.error = newGoal.name.length < 3 ? "Mínimo deben ser 3 caracteres" : "";
     }, [newGoal.name]);
+    useEffect(() => {
+        setAdvancedData({...advancedData, goal : selectedGoal});
+    }, [selectedGoal]);
+    useEffect(() => {
+        setAdvancedData({...advancedData, difficulty : goalDifficulty});
+    }, [goalDifficulty]);
+    useEffect(() => {
+        setAdvancedData({...advancedData, goalPercentage : goalPercentage});
+    }, [goalPercentage]);
+    useEffect(()=>{
+        console.log(advancedData);
+        saveGoal(advancedData);
+    }, [advancedData]);
 
     return (<>
         <Typography variant='h3'>Opciones Power para {habitName}</Typography>
@@ -101,9 +120,9 @@ function RegisterGoal({habitName}) {
             <div className='flex gap-2'>
                 <p>Creo que la actividad tiene una dificultad:</p>
                 <ToggleButton buttons={[
-                        {icon: <FontAwesomeIcon icon={faMoon}/>, text:"fácil", value: difficulty.EASY },
-                        {icon: <FontAwesomeIcon icon={faCircle}/>, text:"media", value: difficulty.MEDIUM},
-                        {icon: <FontAwesomeIcon icon={faSun}/>, text:"difícil", value: difficulty.HARD},
+                        {icon: <FontAwesomeIcon icon={faMoon}/>, text:"fácil", value: goalDifficulties.EASY },
+                        {icon: <FontAwesomeIcon icon={faCircle}/>, text:"media", value: goalDifficulties.MEDIUM},
+                        {icon: <FontAwesomeIcon icon={faSun}/>, text:"difícil", value: goalDifficulties.HARD},
                     ]}
                     defaultSelected={1} setChoosed={setGoalDifficulty}/>
             </div>
@@ -111,4 +130,5 @@ function RegisterGoal({habitName}) {
     </>)
 }
 
-export default RegisterGoal
+export default RegisterGoal;
+export {goalDifficulties, defaultAdvanced};

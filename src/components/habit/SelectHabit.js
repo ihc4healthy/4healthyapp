@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, ButtonGroup, Chip, Popover, PopoverContent, PopoverHandler, Radio, Typography } from '@material-tailwind/react';
+import { Button, Popover, PopoverContent, PopoverHandler, Typography } from '@material-tailwind/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBaseball, faBasketball, faBed, faBicycle, faBook, faBookOpenReader, faBowlingBall, faBriefcase, faBullseye, faChalkboardUser, faCloud, faCow, faDragon, faDumbbell, faFaceSmileBeam, faFeather, faFishFins, faFootball, faFutbol, faGlassWater, faGlasses, faGolfBallTee, faGraduationCap, faHandshakeSimple, faHeart, faKeyboard, faLanguage, faMap, faMusic, faPalette, faPaw, faPersonRays, faPersonRunning, faPersonSkating, faPersonSwimming, faPersonWalking, faTicket, faTooth, faVolleyball, faWheelchairMove } from '@fortawesome/free-solid-svg-icons';
@@ -8,39 +8,15 @@ import { regex } from '../../utils/regexs';
 import Input from '../Input';
 import ToggleButton from '../ToggleButton';
 
-function SelectHabit({setEnableNext}) {
-    const defaultHabits = [
-        {
-            type: "Salud general",
-            list: [
-                {id: 1, icon: <FontAwesomeIcon icon={faBed} />, name:"Dormir"},
-                {id: 2, icon: <FontAwesomeIcon icon={faCloud} />, name:"Meditar"},
-                {id: 3, icon: <FontAwesomeIcon icon={faGlassWater} />, name:"Beber agua"},
-                {id: 4, icon: <FontAwesomeIcon icon={faTooth} />, name:"Usar hilo dental"},
-            ]
-        },
-        {
-            type: "Ejercicios",
-            list: [
-                {id: 5, icon: <FontAwesomeIcon icon={faPersonRunning} />, name:"correr"},
-                {id: 6, icon: <FontAwesomeIcon icon={faBicycle} />, name:"manejar bicicleta"},
-                {id: 7, icon: <FontAwesomeIcon icon={faPersonSkating} />, name:"Usar patines"},
-                {id: 8, icon: <FontAwesomeIcon icon={faPersonWalking} />, name:"caminar"},
-                {id: 9, icon: <FontAwesomeIcon icon={faPersonSwimming} />, name:"Nadar"},
-            ]
-        },
-        {
-            type: "Crecimiento personal",
-            list: [
-                {id: 10, icon: <FontAwesomeIcon icon={faBookOpenReader} />, name:"Leer"},
-                {id: 11, icon: <FontAwesomeIcon icon={faGraduationCap} />, name:"Estudiar"},
-                {id: 12, icon: <FontAwesomeIcon icon={faBook} />, name:"Escribir un diario"},
-                {id: 13, icon: <FontAwesomeIcon icon={faLanguage} />, name:"practicar nuevo idioma"},
-            ]
-        },
-    ];
+const selectedDefault = {id: -1, name:"", icon:"face-smile-beam"};
+
+const SelectHabit = ({setEnableNext, saveHabit, baseHabit}) => {
     
     library.add(
+        faBed, faCloud, faGlassWater, faTooth,
+        faPersonRunning, faBicycle, faPersonSkating, faPersonWalking, faPersonSwimming,
+        faBookOpenReader, faGraduationCap, faBook, faLanguage,
+        // defaults
         faFaceSmileBeam, faGlasses, faBriefcase, faMap,
         faDumbbell, faPersonWalking, faHandshakeSimple, faWheelchairMove,
         faMusic, faTicket, faPalette, faFeather,
@@ -49,6 +25,38 @@ function SelectHabit({setEnableNext}) {
         faFutbol, faBasketball, faVolleyball, faFootball,
         faBowlingBall, faGolfBallTee, faBaseball, faBullseye
     );
+
+    const defaultHabits = [
+        {
+            type: "Salud general",
+            list: [
+                {id: 1, icon: "bed", name:"Dormir"},
+                {id: 2, icon: "cloud", name:"Meditar"},
+                {id: 3, icon: "glass-water", name:"Beber agua"},
+                {id: 4, icon: "tooth", name:"Usar hilo dental"},
+            ]
+        },
+        {
+            type: "Ejercicios",
+            list: [
+                {id: 5, icon: "person-running", name:"correr"},
+                {id: 6, icon: "bicycle", name:"manejar bicicleta"},
+                {id: 7, icon: "person-skating", name:"Usar patines"},
+                {id: 8, icon: "person-walking", name:"caminar"},
+                {id: 9, icon: "person-swimming", name:"Nadar"},
+            ]
+        },
+        {
+            type: "Crecimiento personal",
+            list: [
+                {id: 10, icon: "book-open-reader", name:"Leer"},
+                {id: 11, icon: "graduation-cap", name:"Estudiar"},
+                {id: 12, icon: "book", name:"Escribir un diario"},
+                {id: 13, icon: "language", name:"practicar nuevo idioma"},
+            ]
+        },
+    ];
+    
     const defaultIcons = [
         "face-smile-beam", "glasses", "briefcase", "map",
         "dumbbell", "person-walking", "handshake-simple", "wheelchair-move",
@@ -59,36 +67,38 @@ function SelectHabit({setEnableNext}) {
         "bowling-ball", "golf-ball-tee", "baseball", "bullseye"
 
     ];
-    const selectedDefault = {id: -1, name:"", icon:""};
 
-    const [selected, setSelected] = useState(selectedDefault);
+    const [selected, setSelected] = useState(baseHabit??selectedDefault);
     const [open, setOpen] = useState(false);
-    const [pHabitText, setPHabitText] = useState("");
-    const [pHabitIcon, setPHabitIcon] = useState(defaultIcons[0]);
+    const [pHabitText, setPHabitText] = useState(baseHabit && baseHabit.id == -1 ? baseHabit.name : "");
+    const [pHabitIcon, setPHabitIcon] = useState(baseHabit && baseHabit.id == -1 ? baseHabit.icon : defaultIcons[0]);
     const [habitInput, setHabitInput] = useState({helper:"", color:""});
     
     useEffect(()=>{
         // alert(selected.name)
         if (setEnableNext) {
-            // console.log(selected, selected.id >= 0 && selected.name !== "");
-            setEnableNext(selected.id >= 0 && selected.name !== "");
+            console.log(selected);
+            setEnableNext(selected.name !== "");
         }
+        saveHabit && saveHabit(selected);
     },[selected]);
     useEffect(()=>{
         setHabitInput({helper:"", color:""});
     },[pHabitText.length > 2]);
     
+    // Custom habit ---
     const handleClose = ()=>setOpen(false);
     const handleOpen = ()=>setOpen(true);
     const handleSave = ()=>{
         if (pHabitText.length > 2 && regex.oneLetter.test(pHabitText)) {
             handleClose();
-            setSelected({...selected, id:0, name:pHabitText, icon:pHabitIcon})
+            setSelected({...selected, id:-1, name:pHabitText, icon:pHabitIcon})
         }
         else {
             setHabitInput({helper:"Usar mínimo 2 letras", color:"danger"});
         }
     };
+    // ---
 
     const FAIcon = ({iconName})=><FontAwesomeIcon icon={`fa-solid fa-${iconName}`} />;
     const ChipButton = ({name, icon, id, className})=>
@@ -99,7 +109,7 @@ function SelectHabit({setEnableNext}) {
                 }
             }}
         >
-            {icon} {name}
+            <FAIcon iconName={icon}/> {name}
         </button>;
     
     return (
@@ -125,7 +135,7 @@ function SelectHabit({setEnableNext}) {
             <div className={`${open?"hidden":"flex"} items-center gap-2`}>
                 <ChipButton id={0} className={pHabitText === "" ? 'hidden' :
                                     selected.name === pHabitText ? 'active': ''}
-                    name={pHabitText} icon={<FAIcon iconName={pHabitIcon}/>}/>
+                    name={pHabitText} icon={pHabitIcon}/>
                 <Button variant='text'
                     hidden={open} onClick={handleOpen}>
                     {
@@ -151,7 +161,6 @@ function SelectHabit({setEnableNext}) {
                     <PopoverContent className='text-text-secondary'>
                         {/* //className='grid grid-cols-4 divide-none' */}
                         <ToggleButton cols={4} buttons={
-                            // {icon: <BriefcaseIcon/>, value:"trabajo"},
                             defaultIcons.map((ic, i)=>{return ({
                                 icon: <FAIcon iconName={ic}/>,
                                 value: ic
@@ -170,6 +179,7 @@ function SelectHabit({setEnableNext}) {
         </div>
     </>
     )
-}
+};
 
-export default SelectHabit
+export default SelectHabit;
+export { selectedDefault };
