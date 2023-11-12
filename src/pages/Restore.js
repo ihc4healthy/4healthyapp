@@ -10,7 +10,7 @@ function Restore() {
     const [email, setEmail] = useState("");
     
     const [emailComp, setEmailComp] = useState({color:"primary", helper:"Por favor, complete el campo de correo electrónico", isReady:false});
-    const [canSignin, setCanSignin] = useState(false);
+    const [canIn, setCanIn] = useState(false);
 
     useEffect(()=>{
         let isOk = false;
@@ -18,10 +18,7 @@ function Restore() {
             isOk = true;
             emailComp.isReady = false;
         }
-        if (email.length < 4) {
-            emailComp.helper = "Por favor, complete el campo de correo electrónico";
-        }
-        else if (email.indexOf('@')>=0) {
+        else if (!email.indexOf('@')>=0) {
             if (!regex.email.test(email)){
                 emailComp.helper = "Correo no válido";
             }
@@ -44,7 +41,7 @@ function Restore() {
     }, [email]);
 
     useEffect(()=>{
-        setCanSignin(emailComp.isReady);
+        setCanIn(emailComp.isReady);
     },[emailComp.isReady]);
 
     return (
@@ -73,7 +70,7 @@ function Restore() {
                     <       Input label="Correo electronico" helpText={emailComp.helper}
                             type="text" color={emailComp.color} setValue={setEmail}/>
                             <Link to={`/verification?email=${email}`}>
-                                <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
+                                <button className='btn-primary w-full' type='submit' disabled={!canIn}>
                                     ENVIAR
                                 </button>
                             </Link>
