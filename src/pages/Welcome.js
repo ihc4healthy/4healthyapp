@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { AcademicCapIcon, BriefcaseIcon, CheckIcon, NewspaperIcon } from '@heroicons/react/24/solid'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import welcome from '../svgs/welcome.svg';
-import { AcademicCapIcon, BriefcaseIcon, CheckIcon, NewspaperIcon } from '@heroicons/react/24/solid'
 import ToggleButton from '../components/ToggleButton';
+import welcome from '../svgs/welcome.svg';
 import { avatars } from '../common/avatars';
 
 function Welcome() {
@@ -41,10 +42,12 @@ function Welcome() {
                     <ToggleButton buttons={avatars} defaultSelected={1} setChoosed={setAvatar}/>
                 </div>
 
-                <button className='btn-primary w-full' type='submit' disabled={persona==""}>
-                    <CheckIcon/>
-                    ¡A crear hábitos!
-                </button>
+                <Link to="/habits/new">
+                    <button className='btn-primary w-full' type='submit' disabled={persona==""}>
+                        <CheckIcon/>
+                        ¡A crear hábitos!
+                    </button>
+                </Link>
             </form>
         </main>
         <Footer/>
