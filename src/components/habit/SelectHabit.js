@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Popover, PopoverContent, PopoverHandler, Typography } from '@material-tailwind/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBaseball, faBasketball, faBed, faBicycle, faBook, faBookOpenReader, faBowlingBall, faBriefcase, faBullseye, faChalkboardUser, faCloud, faCow, faDragon, faDumbbell, faFaceSmileBeam, faFeather, faFishFins, faFootball, faFutbol, faGlassWater, faGlasses, faGolfBallTee, faGraduationCap, faHandshakeSimple, faHeart, faKeyboard, faLanguage, faMap, faMusic, faPalette, faPaw, faPersonRays, faPersonRunning, faPersonSkating, faPersonSwimming, faPersonWalking, faTicket, faTooth, faVolleyball, faWheelchairMove } from '@fortawesome/free-solid-svg-icons';
 import { CheckIcon, PencilSquareIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { regex } from '../../utils/regexs';
+import FAIcon from '../FAIcon';
 import Input from '../Input';
 import ToggleButton from '../ToggleButton';
 
 const selectedDefault = {id: -1, name:"", icon:"face-smile-beam"};
 
 const SelectHabit = ({setEnableNext, saveHabit, baseHabit}) => {
-    
-    library.add(
-        faBed, faCloud, faGlassWater, faTooth,
-        faPersonRunning, faBicycle, faPersonSkating, faPersonWalking, faPersonSwimming,
-        faBookOpenReader, faGraduationCap, faBook, faLanguage,
-        // defaults
-        faFaceSmileBeam, faGlasses, faBriefcase, faMap,
-        faDumbbell, faPersonWalking, faHandshakeSimple, faWheelchairMove,
-        faMusic, faTicket, faPalette, faFeather,
-        faKeyboard, faPersonRays, faChalkboardUser, faHeart,
-        faPaw, faCow, faFishFins, faDragon,
-        faFutbol, faBasketball, faVolleyball, faFootball,
-        faBowlingBall, faGolfBallTee, faBaseball, faBullseye
-    );
-
     const defaultHabits = [
         {
             type: "Salud general",
@@ -65,7 +48,6 @@ const SelectHabit = ({setEnableNext, saveHabit, baseHabit}) => {
         "paw", "cow", "fish-fins", "dragon",
         "futbol", "basketball", "volleyball", "football",
         "bowling-ball", "golf-ball-tee", "baseball", "bullseye"
-
     ];
 
     const [selected, setSelected] = useState(baseHabit??selectedDefault);
@@ -100,7 +82,6 @@ const SelectHabit = ({setEnableNext, saveHabit, baseHabit}) => {
     };
     // ---
 
-    const FAIcon = ({iconName})=><FontAwesomeIcon icon={`fa-solid fa-${iconName}`} />;
     const ChipButton = ({name, icon, id, className})=>
         <button className={`${className} btn-chip ${selected.name == name ? 'active':''}`}
             onClick={()=>{

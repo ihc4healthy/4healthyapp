@@ -7,7 +7,7 @@ import ToggleButton from '../ToggleButton'
 import { CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 const goalDifficulties = {EASY: "EASY", MEDIUM: "MEDIUM", HARD: "HARD"};
-const defaultGoal = {id: 0, name: "general", description: ""};
+const defaultGoal = {id: 0, name: "vida saludable", description: "mejorar mi calidad de vida"};
 const defaultAdvanced = {goal: defaultGoal, difficulty: goalDifficulties.MEDIUM, goalPercentage: 10};
 
 function RegisterGoal({habitName, saveGoal}) {
@@ -131,4 +131,4 @@ function RegisterGoal({habitName, saveGoal}) {
 }
 
 export default RegisterGoal;
-export {goalDifficulties, defaultAdvanced};
+export {goalDifficulties, defaultAdvanced, defaultGoal};
