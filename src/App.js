@@ -10,6 +10,7 @@ import NewHabit from './pages/habit/NewHabit';
 // BrowserRouter
 import Verification from './pages/Verification'
 import Confirm from './pages/Confirm'
+import HabitsList from './pages/habit/HabitsList';
 // import Example from './pages/Example';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/verification" element={<Verification/>}/>
         <Route path="/confirm" element={<Confirm/>}/>
         <Route path="/habits">
+          <Route path='' element={<HabitsList/>}/>
           <Route path='new' element={<NewHabit/>}/>
         </Route>
       </Routes>
