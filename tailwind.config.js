@@ -22,7 +22,7 @@ colors = {
     light:    '#E44E4E',
     DEFAULT:  '#DE2323',
     dark:     '#c21a1a',
-    darkest:     '#810812',
+    darkest:  '#810812',
     contrast: '#ffffff',
   },
   text: {

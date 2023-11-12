@@ -34,6 +34,8 @@ const btnFillGrad = {
   },
 };
 
+//============================================//
+
 const customTheme = {
   typography: {
     styles: {
@@ -151,6 +153,30 @@ const customTheme = {
           position: "relative",
           top: "",
           translate: "",
+        },
+      },
+    },
+  },
+  //============================================//
+  progress: {
+    valid: {
+      colors: validColors,
+    },
+    styles: {
+      variants: {
+        filled: {
+          primary: {
+            backgroud: "bg-primary",
+            color: "text-primary-contrast",
+          },
+          secondary: {
+            backgroud: "bg-secondary",
+            color: "text-secondary-contrast",
+          },
+          danger: {
+            backgroud: "bg-danger",
+            color: "text-danger-contrast",
+          },
         },
       },
     },
