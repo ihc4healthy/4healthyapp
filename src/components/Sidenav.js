@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {Card,Typography,List,ListItem,ListItemPrefix,ListItemSuffix,Chip} from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
@@ -22,7 +22,7 @@ export const DSidebar = ()=> {
     },
     {
       icon: <ShoppingBagIcon className="h-5 w-5" />,
-      text: "MIS HÁBITOS", url: "#",
+      text: "MIS HÁBITOS", url: "/habits/new",
     },
     {
       icon: <InboxIcon className="h-5 w-5" />,
@@ -42,8 +42,13 @@ export const DSidebar = ()=> {
     },
   ];
   
-  const [selected, setSelected] = React.useState(1);
-  const setSelectedItem = (value) => setSelected(value);
+  const location = useLocation();
+  const getFirstRoute = (path) => path?.split('/')[1];
+  // const [selected, setSelected] = React.useState(location.pathname);
+  // useEffect(() => {
+  //   // console.log(location.pathname);
+  //   setSelected(location.pathname);
+  // }, [location])
 
   return (
     <Card className="sticky top-0 h-[calc(100vh-1rem)] w-full max-w-[20rem] p-4
@@ -60,7 +65,7 @@ export const DSidebar = ()=> {
       <List className="font-heading">
         {tabs.map((tab, i) =>
         <Link href={tab.url} className="text-text-primary" key={`li-${i}`}>
-          <ListItem onClick={tab.onClick} selected={selected === i}>
+          <ListItem onClick={tab.onClick} selected={getFirstRoute(tab.url) === getFirstRoute(location.pathname)}>
             <ListItemPrefix>{tab.icon}</ListItemPrefix>
             {tab.text}
             {tab.badge && 
