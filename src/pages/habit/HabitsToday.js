@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment/moment';
 import 'moment/locale/es';
 import { Badge, Button, Card, CardBody, Dialog, DialogBody, DialogFooter, DialogHeader, Progress, Typography } from '@material-tailwind/react';
 import { DSidebar } from '../../components/Sidenav';
 import HabitCheckCard, { habitStates } from '../../components/habit/HabitCheckCard';
 import { defaultGoal, goalDifficulties } from '../../components/habit/RegisterGoal';
-import { CheckIcon, FaceSmileIcon, HeartIcon, StarIcon, TrophyIcon } from '@heroicons/react/24/solid';
+import { CheckIcon, HeartIcon, StarIcon, TrophyIcon } from '@heroicons/react/24/solid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 moment.locale('es')
 
-const HabitsList = () => {
+const HabitsToday = () => {
     const states = [
         {title: "Pendientes", state: habitStates.PENDING},
         {title: "Atrasados", state: habitStates.LATE},
@@ -18,17 +18,17 @@ const HabitsList = () => {
     ];
         
     const [todayHabits, setTodayHabits] = useState([
-        {   id: 0, icon: "face-smile-beam", habitName: "hábito1",
+        {   id: 0, icon: "face-smile-beam", habitName: "hábito1", time: "15:00",
             difficulty: goalDifficulties.MEDIUM, goalPercentage: 10, progress:20,
             goalName: defaultGoal.name, goalDescription: defaultGoal.description,
             state:habitStates.PENDING
         },
-        {   id: 1, icon: "face-smile-beam", habitName: "hábito2",
+        {   id: 1, icon: "face-smile-beam", habitName: "hábito2", time: "13:00",
             difficulty: goalDifficulties.EASY, goalPercentage: 10, progress:20,
             goalName: defaultGoal.name, goalDescription: defaultGoal.description,
             state:habitStates.DONE
         },
-        {   id: 2, icon: "face-smile-beam", habitName: "hábito3",
+        {   id: 2, icon: "face-smile-beam", habitName: "hábito3", time: "10:00",
             difficulty: goalDifficulties.HARD, goalPercentage: 10, progress:20,
             goalName: defaultGoal.name, goalDescription: defaultGoal.description,
             state:habitStates.LATE
@@ -36,6 +36,7 @@ const HabitsList = () => {
     ]);
     const [open, setOpen] = useState(false);
     const [dialogStep, setDialogStep] = useState(0);
+    const [time, setTime] = useState(moment().format('HH:mm'));
 
     const handleCheck = (th)=>{
         if (th.state !== habitStates.DONE) {
@@ -47,11 +48,19 @@ const HabitsList = () => {
         const index = todayHabits.findIndex((v)=>v.id === th.id);
         if (index >= 0) {
             todayHabits[index] = th;
-            if (th.state == habitStates.DONE) { handleOpen(); };
+            if (th.state === habitStates.DONE) { handleOpen(); };
             setTodayHabits([...todayHabits]);
         }
     };
     const handleOpen = () => setOpen(!open);
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(moment().format('HH:mm'))
+        }, 60000)
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <div className='w-full h-full flex'>
@@ -64,6 +73,9 @@ const HabitsList = () => {
                     <Typography variant='h5' className='text-text-secondary'>
                         {moment().format('dddd DD [de] MMMM [del] YYYY')}
                     </Typography>
+                    <Typography variant='lead'>
+                        | {time}
+                    </Typography>
                 </div>
 
                 {states.map((hs) => 
@@ -73,7 +85,7 @@ const HabitsList = () => {
                             .filter(th => th.state===hs.state)
                             .map((th, i) =>
                                 <HabitCheckCard key={`th-${th}`}
-                                    habitName={th.habitName} icon={th.icon}
+                                    habitName={th.habitName} icon={th.icon} time={th.time}
                                     progress={th.progress} difficulty={th.difficulty}
                                     activitiesToGoal={(100-th.progress)/th.goalPercentage}
                                     state={th.state} onChange={(e)=>handleCheck(th)}
@@ -167,4 +179,4 @@ const HabitsList = () => {
     )
 };
 
-export default HabitsList;
+export default HabitsToday;
