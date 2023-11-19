@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Button, Step, Stepper, Typography } from '@material-tailwind/react';
 import { ArrowRightIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { DSidebar } from '../../components/Sidenav';
 import SelectHabit, { selectedDefault } from '../../components/habit/SelectHabit';
 import SelectSchedule, { defaultSchedule } from '../../components/habit/SelectSchedule';
 import RegisterGoal, { defaultAdvanced } from '../../components/habit/RegisterGoal';
+import { apiData } from '../../common/apiData';
+import { UserContext } from '../../utils/UserConxtextProvider';
 
 function NewHabit() {
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
+
     const [habit, setHabit] = useState({
+        userId: user.id,
         selectedHabit: selectedDefault,
         schedules: [defaultSchedule],
         reminders: [],
-        advanced: defaultAdvanced
+        advanced: defaultAdvanced,
     });
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
     const [isFirstStep, setIsFirstStep] = useState(false);
     const [nextEnabled, setNextEnabled] = useState(false);
-    
+
     const handleNext = () => {!isLastStep && setActiveStep((cur) => cur + 1)};
     const handlePrev = () => {!isFirstStep && setActiveStep((cur) => cur - 1)};
     const handleChangeStep = (step) => {
@@ -25,7 +33,9 @@ function NewHabit() {
             setActiveStep(step);
         }
     };
-    const handleSave = () => {
+    const handleSave = (event) => {
+        event.preventDefault();
+        
         if (!isFirstStep && nextEnabled) {
             if (habit.selectedHabit.id === -1) {
                 habit.selectedHabit.name = habit.selectedHabit.name.trim();
@@ -36,7 +46,17 @@ function NewHabit() {
                 habit.advanced.goal.description = habit.advanced.goal.description.trim();
                 console.log("registering goal", habit.advanced.goal);
             };
-            console.log('saving', habit);
+            
+            axios.post( apiData.baseUrl + '/habit', {...habit})
+                .then(response => {
+                    alert('Hábito registrado con éxito!');
+                    console.log('saving', habit);
+                    navigate('/today');
+                })
+                .catch(error => {
+                    console.error('Error al registrar el hábito:', error);
+                    alert('Error al registrar el hábito');
+                });
         }
     };
 

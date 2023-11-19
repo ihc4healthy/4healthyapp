@@ -7,10 +7,10 @@ const defaultSchedule = {start: "07:00", duration: "00:30", days: [...defaultDay
 
 const SelectSchedule = ({habitName, setEnableNext, saveSchedule, saveReminders}) => {
     const [reminderOpts, setReminderOpts] = useState([
-        {timeBefore: 0, name: "A la hora", checked: false},
-        {timeBefore: 60*5, name: "5 min. antes", checked: false},
-        {timeBefore: 60*10, name: "10 min. antes", checked: false},
-        {timeBefore: 60*60, name: "1 hora antes", checked: false},
+        {timeBefore: "00:00:00", name: "A la hora", checked: false},
+        {timeBefore: "00:05:00", name: "5 min. antes", checked: false},
+        {timeBefore: "00:10:00", name: "10 min. antes", checked: false},
+        {timeBefore: "01:00:00", name: "1 hora antes", checked: false},
     ]);
 
     const [schedules, setSchedules] = useState([defaultSchedule]);
