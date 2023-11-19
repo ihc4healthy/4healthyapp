@@ -11,7 +11,7 @@ function NewHabit() {
         selectedHabit: selectedDefault,
         schedules: [defaultSchedule],
         reminders: [],
-        goal: defaultAdvanced
+        advanced: defaultAdvanced
     });
     const [activeStep, setActiveStep] = useState(0);
     const [isLastStep, setIsLastStep] = useState(false);
@@ -31,10 +31,10 @@ function NewHabit() {
                 habit.selectedHabit.name = habit.selectedHabit.name.trim();
                 console.log("registering habit", habit.selectedHabit);
             };
-            if (habit.goal.goal.id === -1) {
-                habit.goal.goal.name = habit.goal.goal.name.trim();
-                habit.goal.goal.description = habit.goal.goal.description.trim();
-                console.log("registering goal", habit.goal.goal);
+            if (habit.advanced.goal.id === -1) {
+                habit.advanced.goal.name = habit.advanced.goal.name.trim();
+                habit.advanced.goal.description = habit.advanced.goal.description.trim();
+                console.log("registering goal", habit.advanced.goal);
             };
             console.log('saving', habit);
         }
@@ -53,7 +53,7 @@ function NewHabit() {
             setEnableNext={(enabled) => setNextEnabled(activeStep===1 && enabled)}
         />,
         <RegisterGoal habitName={habit.selectedHabit.name}
-            saveGoal={(g) => setHabit({...habit, goal:g}) }
+            saveGoal={(g) => setHabit({...habit, advanced:g}) }
         />
     ];
 

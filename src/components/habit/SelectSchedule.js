@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Checkbox, List, ListItem, Typography } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
-import Schedule from './ScheduleDetail';
+import Schedule, { defaultDays } from './ScheduleDetail';
 
-const defaultSchedule = {start: "07:00", duration: "00:30", days:[], valid:true};
+const defaultSchedule = {start: "07:00", duration: "00:30", days: [...defaultDays], valid:true};
 
 const SelectSchedule = ({habitName, setEnableNext, saveSchedule, saveReminders}) => {
     const [reminderOpts, setReminderOpts] = useState([

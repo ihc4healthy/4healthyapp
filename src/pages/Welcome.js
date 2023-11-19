@@ -43,7 +43,7 @@ function Welcome() {
                 </div>
 
                 <Link to="/habits">
-                    <button className='btn-primary w-full' type='submit' disabled={persona==""}>
+                    <button className='btn-primary w-full' type='submit' disabled={persona===""}>
                         <CheckIcon/>
                         ¡A crear hábitos!
                     </button>

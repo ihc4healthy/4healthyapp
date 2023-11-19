@@ -6,26 +6,21 @@ import { days } from '../../common/time';
 import Input from '../Input';
 
 // schedule {start: "07:00", duration: "00:30", days:[5], valid:true}
+const defaultDays = [false, false, false, false, false, false, false];
 
 const Schedule = ({index, schedule, setSchedule, removeSchedule})=>{
-
-    const getDefaultDaysCheched = ()=>{
-        let arr = Array(days).fill(false);
-        schedule?.days?.forEach(i => arr[i] = true);
-        return arr;
-    };
-    
     const [startTime, setStartTime] = useState(schedule.start ?? "07:00");
     const [duration, setDuration] = useState(schedule.duration ?? "00:30");
-    const [daysChecked, setDaysChecked] = useState( getDefaultDaysCheched() );
+    const [daysChecked, setDaysChecked] = useState( schedule.days ?? [...defaultDays] );
     
     const validate = ()=>{
+        const ndays = schedule.days?.filter(d => d===true).length;
         // tiempo de inicio
         if (startTime === "") { schedule.valid = false; }
         // duración mayor a 0
         else if (duration === "" || duration === "00:00") { schedule.valid = false; }
         // menos un día seleccionado
-        else if (schedule.days?.length === 0) { schedule.valid = false; }
+        else if (ndays === 0 || ndays > 7) { schedule.valid = false; }
         else { schedule.valid = true; }
     }
     useEffect(()=>{
@@ -39,17 +34,18 @@ const Schedule = ({index, schedule, setSchedule, removeSchedule})=>{
         setSchedule(schedule);
     },[duration]);
     useEffect(()=>{
-        schedule.days = daysChecked.map((d, i) => d ? i : undefined).filter(x => x != undefined);
-        validate();
+        schedule.days = daysChecked;
+        //.map((d, i) => d ? i : undefined).filter(x => x != undefined)
+        validate(schedule);
         setSchedule(schedule);
     },[daysChecked]);
     
     useEffect(()=>{
         setStartTime(schedule.start);
         setDuration(schedule.duration);
-        daysChecked.fill(false);
-        schedule.days.forEach(i=>daysChecked[i]=true);
-        setDaysChecked(daysChecked);
+        // daysChecked.fill(false);
+        // schedule.days.forEach(i=>daysChecked[i]=true);
+        setDaysChecked(schedule.days);
         // console.log('index change ' + index + '... ' + schedule.start + ' ' + schedule.days)
     }, [schedule]);
 
@@ -98,4 +94,5 @@ const Schedule = ({index, schedule, setSchedule, removeSchedule})=>{
     </>);
 };
 
-export default Schedule
+export default Schedule;
+export {defaultDays};
