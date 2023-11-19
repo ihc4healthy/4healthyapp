@@ -13,21 +13,21 @@ const btnFillGradFocusActive = {
 const btnFillGrad = {
   primary: {
     backgroud: "bg-primary",
-    color: "primary-contrast",
+    color: "text-primary-contrast",
     shadow: "shadow-md shadow-primary-dark/10",
     hover: "hover:shadow-lg hover:shadow-primary-darkest/20",
     ...btnFillGradFocusActive,
   },
   secondary: {
     backgroud: "bg-secondary",
-    color: "secondary-contrast",
+    color: "text-secondary-contrast",
     shadow: "shadow-md shadow-secondary-dark/10",
     hover: "hover:shadow-lg hover:shadow-secondary-darkest/20",
     ...btnFillGradFocusActive,
   },
   danger: {
     backgroud: "bg-danger",
-    color: "danger-contrast",
+    color: "text-danger-contrast",
     shadow: "shadow-md shadow-danger-dark/10",
     hover: "hover:shadow-lg hover:shadow-danger-darkest/20",
     ...btnFillGradFocusActive,
@@ -177,6 +177,28 @@ const customTheme = {
             backgroud: "bg-danger",
             color: "text-danger-contrast",
           },
+        },
+      },
+    },
+  },
+  //============================================//
+  badge: {
+    valid: {
+      colors: validColors,
+    },
+    styles: {
+      colors: {
+        primary: {
+          backgroud: "bg-primary",
+          color: "text-primary-contrast",
+        },
+        secondary: {
+          backgroud: "bg-secondary",
+          color: "text-secondary-contrast",
+        },
+        danger: {
+          backgroud: "bg-danger",
+          color: "text-danger-contrast",
         },
       },
     },

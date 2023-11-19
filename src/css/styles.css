@@ -13,7 +13,8 @@
   /* Buttons */
   button, [class^="btn"] {
     @apply rounded-md flex;
-    @apply gap-x-2 justify-center items-center px-3.5 py-2.5 text-sm font-semibold uppercase !important;
+    @apply transition gap-x-2 justify-center items-center px-3.5 py-2.5
+            text-sm font-semibold uppercase !important;
   }
   /* btn-primary btn-secondary btn-elevated */
   .btn-primary, .btn-secondary, .btn-elevated {
