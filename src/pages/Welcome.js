@@ -42,7 +42,7 @@ function Welcome() {
                     <ToggleButton buttons={avatars} defaultSelected={1} setChoosed={setAvatar}/>
                 </div>
 
-                <Link to="/habits/new">
+                <Link to="/habits">
                     <button className='btn-primary w-full' type='submit' disabled={persona==""}>
                         <CheckIcon/>
                         ¡A crear hábitos!
