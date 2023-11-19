@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {Card,List,ListItem,ListItemPrefix,ListItemSuffix,Chip} from "@material-tailwind/react";
 import {
@@ -13,8 +13,10 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 import UserStats from './UserStats';
+import { UserContext } from "../utils/UserConxtextProvider";
 
 export const DSidebar = ()=> {
+  const { user, setUser } = useContext(UserContext);
   const tabs = [
     {
       icon: <PresentationChartBarIcon className="h-5 w-5" />,
@@ -38,7 +40,8 @@ export const DSidebar = ()=> {
     },
     {
       icon: <PowerIcon className="h-5 w-5" />,
-      text: "Log Out", onClick: ()=>{},
+      text: "Log Out",
+      onClick: ()=>{setUser(null);},
     },
   ];
   
@@ -49,8 +52,7 @@ export const DSidebar = ()=> {
   //   // console.log(location.pathname);
   //   setSelected(location.pathname);
   // }, [location])
-
-  const [user, setUser] = useState({id: -1, name: "Usuario", email:"", level:1, levelProgress:10, avatar:1});
+  
   // const [selected, setSelected] = React.useState(1);
   // const setSelectedItem = (value) => setSelected(value);
   

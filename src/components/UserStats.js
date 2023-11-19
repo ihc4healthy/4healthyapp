@@ -4,7 +4,7 @@ import { HeartIcon } from '@heroicons/react/24/solid';
 import { avatars } from "../common/avatars";
 
 function UserStats({user}) {
-  const avatar = avatars[user?.avatar ?? 1];
+  const avatar = avatars[user?.profilePic ?? 1];
 
   return (
     <div className="flex py-4 items-center">
@@ -15,7 +15,7 @@ function UserStats({user}) {
 
       <div className="w-full">
         <Typography variant="h5" color="blue-gray" className="center">
-          Usuario
+          {user.name}
         </Typography>
         
         <div className="w-full text-text-secondary">

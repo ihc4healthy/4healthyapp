@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AcademicCapIcon, BriefcaseIcon, CheckIcon, NewspaperIcon } from '@heroicons/react/24/solid'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ToggleButton from '../components/ToggleButton';
 import welcome from '../svgs/welcome.svg';
 import { avatars } from '../common/avatars';
+import { UserContext } from '../utils/UserConxtextProvider';
+import { Button } from '@material-tailwind/react';
 
 function Welcome() {
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
     const [persona, setPersona] = useState("");
     const [avatar, setAvatar] = useState("");
-    
+
     return (
     <div className='full-page'>
         <Header/>
@@ -19,7 +23,7 @@ function Welcome() {
             <div className='flex flex-col gap-y-8'>
                 <p className='font-bold bold-big text-2xl text-center'>
                     <span className='text-4xl'>
-                        [Username]
+                        {user.name ?? 'Anónimo'}
                     </span>
                     <br/>
                     ¡4Healty te da la Bienvenida!
@@ -42,12 +46,17 @@ function Welcome() {
                     <ToggleButton buttons={avatars} defaultSelected={1} setChoosed={setAvatar}/>
                 </div>
 
-                <Link to="/habits">
-                    <button className='btn-primary w-full' type='submit' disabled={persona===""}>
-                        <CheckIcon/>
-                        ¡A crear hábitos!
-                    </button>
-                </Link>
+                <Button color='primary' disabled={persona===""}
+                    onClick={(event)=>{
+                        event.preventDefault();
+                        if (persona!=="") {
+                            navigate("/habits");
+                        }
+                    }}
+                >
+                    <CheckIcon/>
+                    ¡A crear hábitos!
+                </Button>
             </form>
         </main>
         <Footer/>
