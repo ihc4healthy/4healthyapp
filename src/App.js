@@ -1,4 +1,5 @@
 import './App.css';
+import { useContext } from 'react';
 import {BrowserRouter, HashRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -11,20 +12,19 @@ import Verification from './pages/Verification'
 import Confirm from './pages/Confirm'
 import HabitsToday from './pages/habit/HabitsToday';
 import HabitsList from './pages/habit/HabitsList';
+import { UserContext } from './utils/UserConxtextProvider';
 // import Example from './pages/Example';
 
 function App() {
-  let user = localStorage.getItem('user');
-  //https://stackoverflow.com/questions/52931183/how-to-save-variables-to-localstorage-in-reactjs
-  // localStorage.setItem('user', );
   const useHash = true;
   const Router = useHash ? HashRouter : BrowserRouter;
+  const { user, setUser } = useContext(UserContext);
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={
-          <Navigate to={user === null?"/signup":"/habits"} replace />
+          <Navigate to={user === null?"/signup":"/today"} replace />
         }/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>

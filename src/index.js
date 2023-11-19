@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@material-tailwind/react';
 import { customTheme } from './utils/customTheme';
+import UserContextProvider from './utils/UserConxtextProvider';
 
 // const consoleWarn = console.warn;
 // const SUPPRESSED_WARNINGS = ['color'];
@@ -20,7 +21,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider value={customTheme}>
-      <App />
+      <UserContextProvider>
+        <App />
+      </UserContextProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
