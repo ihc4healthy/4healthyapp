@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Card, Typography, Button } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 import FAIcon from '../../components/FAIcon';
 import { DSidebar } from '../../components/Sidenav';
 import { Link } from 'react-router-dom';
+import { apiData } from '../../common/apiData';
 
 const HabitsList = () => {
-    const [habits, setHabits] = useState([
-        {   id: 0, icon: "face-smile-beam", habitName: "hábito1",
-        },
-        {   id: 1, icon: "face-smile-beam", habitName: "hábito2",
-        },
-        {   id: 2, icon: "face-smile-beam", habitName: "hábito3",
-        },
-    ]);
+    // "userId": number,
+    // "goalId": number,
+    // "goalName": string,
+    // "goalDescription": string,
+    // "goalProgress": number,
+    // "id": number,
+    // "name": string,
+    // "icon": string,
+    // "difficulty": enum,
+    // "goalPerc": number,
+    // "reminders": "hh:mm"[]
+    const [habits, setHabits] = useState([]);
+    useEffect(() => {
+        axios.get(apiData.baseUrl + '/habits', {
+            params: {
+                userId: 1,
+            }
+        })
+            .then(response => {
+                setHabits(response.data.habits);
+            })
+            .catch(error => {
+                console.error('Error al obtener los hábitos:', error);
+            });
+    }, []);
 
     return (
         <div className='w-full h-full flex'>
@@ -37,7 +56,7 @@ const HabitsList = () => {
                 >
                     <FAIcon iconName={h.icon} className={"text-4xl"}/>
                     <Typography variant='small' className='font-heading grow text-center'>
-                        {h.habitName}
+                        {h.name}
                     </Typography>
                 </Card>
                 )}
