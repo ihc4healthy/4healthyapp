@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {Card,List,ListItem,ListItemPrefix,ListItemSuffix,Chip} from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
@@ -8,7 +8,6 @@ import {
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
-  HeartIcon,
 } from "@heroicons/react/24/solid";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -16,6 +15,7 @@ import UserStats from './UserStats';
 import { UserContext } from "../utils/UserConxtextProvider";
 
 export const DSidebar = ()=> {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const tabs = [
     {
@@ -41,7 +41,10 @@ export const DSidebar = ()=> {
     {
       icon: <PowerIcon className="h-5 w-5" />,
       text: "Log Out",
-      onClick: ()=>{setUser(null);},
+      onClick: ()=>{
+        setUser(null);
+        navigate("/login");
+      },
     },
   ];
   

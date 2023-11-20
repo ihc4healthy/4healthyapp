@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Button } from '@material-tailwind/react';
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import Footer from '../components/Footer';
@@ -8,6 +9,7 @@ import Input from '../components/Input';
 import clock from '../svgs/clock.svg';
 import { regex } from '../utils/regexs';
 import { UserContext } from '../utils/UserConxtextProvider';
+import { apiData } from '../common/apiData';
 
 function Signup() {
     const navigate = useNavigate();
@@ -24,8 +26,19 @@ function Signup() {
     const handleSave = (event)=>{
         event.preventDefault();
         if (canSignup) {
-            setUser({id: 1, username: username, password: password, profilePic:1, level:1, levelProgress:10});
-            navigate("/welcome");
+            axios.post( apiData.baseUrl + '/user', {
+                name: username,
+                password: password,
+            })
+            .then(response => {
+                console.log('Signed up!', response.data.user);
+                // {id: 1, username: username, password: password, profilePic:1, level:1, levelProgress:10}
+                setUser(response.data.user);
+                navigate("/welcome");
+            })
+            .catch(error => {
+                console.error('Error en check del hábito:', error);
+            });
         }
     };
     
