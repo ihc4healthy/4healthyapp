@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@material-tailwind/react';
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import clock from '../svgs/clock.svg';
 import Input from '../components/Input';
-import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
-import { Link } from 'react-router-dom';
+import clock from '../svgs/clock.svg';
 import { regex } from '../utils/regexs';
+import { UserContext } from '../utils/UserConxtextProvider';
 
-function Signin() {
+function Signup() {
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
     const existentUsernames = ['aaaa','bbbb','cccc'];
 
     const [password, setPassword] = useState("");
@@ -15,11 +19,19 @@ function Signin() {
     
     const [passwordComp, setPasswordComp] = useState({color:"primary", helper:"Usar letras y números", isReady:false});
     const [userComp, setUserComp] = useState({color:"primary", helper:"Debe ser mayor a 4 caracteres", isReady:false});
-    const [canSignin, setCanSignin] = useState(false);
+    const [canSignup, setCanSignup] = useState(false);
+
+    const handleSave = (event)=>{
+        event.preventDefault();
+        if (canSignup) {
+            setUser({id: 1, username: username, password: password, profilePic:1, level:1, levelProgress:10});
+            navigate("/welcome");
+        }
+    };
     
     useEffect(()=>{
         let isOk = false;
-        if (password.length == 0) {
+        if (password.length === 0) {
             isOk = true;
             passwordComp.isReady = false;
         }
@@ -47,7 +59,7 @@ function Signin() {
 
     useEffect(()=>{
         let isOk = false;
-        if (username.length == 0) {
+        if (username.length === 0) {
             isOk = true;
             userComp.isReady = false;
         }
@@ -83,7 +95,7 @@ function Signin() {
     }, [username]);
 
     useEffect(()=>{
-        setCanSignin(userComp.isReady && passwordComp.isReady);
+        setCanSignup(userComp.isReady && passwordComp.isReady);
     },[userComp.isReady, passwordComp.isReady]);
 
     return (
@@ -102,20 +114,18 @@ function Signin() {
                     un <span className='text-text-secondary'>hábito</span>
                 </p>
 
-                <form name='signin' id='signin' className='flex flex-col gap-y-4'>
+                <form name='Signup' id='Signup' className='flex flex-col gap-y-4'>
                     <Input label="Nombre de usuario" placeholder="nomusuario" helpText={userComp.helper}
-                        type="text" color={userComp.color} setValue={setUsername}/>
+                        type="text" color={userComp.color} setValue={(val)=>{setUsername(val.toLowerCase());}}/>
                     <Input label="Contraseña" placeholder="******" helpText={passwordComp.helper}
                         type="password" color={passwordComp.color} setValue={setPassword}/>
 
-                    <p>¿Ya eres parte de 4Healty? <a href='#' className='text-secondary-dark'>Ingresa</a></p>
+                    <p>¿Ya eres parte de 4Healty? <Link to="/login" className='text-secondary-dark'>Ingresa</Link></p>
 
-                    <Link to="/welcome">
-                        <button className='btn-primary w-full' type='submit' disabled={!canSignin}>
-                            <ArrowRightOnRectangleIcon/>
-                            Únete
-                        </button>
-                    </Link>
+                    <Button color='primary' className='w-full' disabled={!canSignup} onClick={handleSave}>
+                        <ArrowRightOnRectangleIcon/>
+                        Únete
+                    </Button>
                 </form>
             </div>
         </main>
@@ -124,4 +134,4 @@ function Signin() {
     )
 }
 
-export default Signin;
+export default Signup;

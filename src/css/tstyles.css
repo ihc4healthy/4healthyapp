@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--text-primary);
+    /* background-image: url("../svgs/backHome.svg"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-size: medium;
+    font-family: var(--font-display);
+}
+
+.TerminosList {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    margin: 20px;
+    border-radius: 10px;
+    font-size: 14px; /* Tamaño de fuente ajustado */
+  }
+
+.TerminosItem {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 20px; /* Espacio de tabulador */
+  }
+
+.TerminosTitle {
+    font-size: 16px; /* Tamaño de fuente para títulos ajustado */
+    font-weight: bold;
+}
+
+.TerminosDescription {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.TerminosList ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+.TerminosList li {
+    margin-bottom: 20px;
+    padding-left: 20px; /* Espacio de tabulador */
+  }
+
+.TerminosList h4 {
+    font-weight: bold;
+    text-align: justify;
+}
+
+.TerminosList h5 {
+    font-weight: 500; /* Ajustado el peso de la fuente */
+    text-align: justify;
+}
+
+.TerminosList ul {
+    padding-left: 20px;
+  }
+
+.TerminosList h6 {
+    font-weight: 400;
+    text-align: justify;
+}
+
+a {
+    color: var(--primary-dark);
+}

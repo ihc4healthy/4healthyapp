@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './toggle-button.css';
 
-function ToggleButton({buttons, defaultSelected, setChoosed}) {
+function ToggleButton({buttons, defaultSelected, setChoosed, cols}) {
     // buttons{icon, imageSrc, text, value}
     const [selected, setSelected] = useState(defaultSelected!=undefined?defaultSelected:-1);
     useEffect(()=>{
@@ -11,10 +11,10 @@ function ToggleButton({buttons, defaultSelected, setChoosed}) {
     }, [selected]);
 
     return (
-        <div className='toggle-button flex flex-row justify-center'>
+        <div className={`toggle-button ${buttons.length < 4 ? 'flex': `grid grid-cols-${cols?cols:4}`} justify-center`}>
             {buttons.map((btn, i) =>
             <button type='button' key={`tbtn-btn-${i}`}
-                className={`flex-col btn-elevated items-center ${i==selected?'active':''}`}
+                className={`flex-col btn-elevated ${i==selected?'active text-text-primary':'text-text-secondary'}`}
                 onClick={()=>{setSelected(i)}} title={btn.text} value={btn.value}
             >
                 {btn.imageSrc ?

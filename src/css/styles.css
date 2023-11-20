@@ -3,14 +3,20 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
 
-@layer {
+
+@layer base {
   * {
     @apply: focus:outline-none !important;
   }
+}
+@layer components {
   /* Buttons */
   button, [class^="btn"] {
-    @apply flex gap-x-2 justify-center rounded-md px-3.5 py-2.5 text-sm font-semibold uppercase !important;
+    @apply rounded-md flex;
+    @apply transition gap-x-2 justify-center items-center px-3.5 py-2.5
+            text-sm font-semibold uppercase !important;
   }
+  /* btn-primary btn-secondary btn-elevated */
   .btn-primary, .btn-secondary, .btn-elevated {
     @apply shadow hover:shadow-md focus:shadow active:shadow-sm !important;
   }
@@ -32,26 +38,40 @@
       hover:bg-danger-dark focus:bg-danger-dark
       active:bg-danger-light !important;
   }
+  /* btn-flat btn-chip */
   [class^="btn-"]:disabled {
     @apply shadow bg-background-disabled text-text-disabled !important;
   }
-  [class^="btn-flat"]:not(:disabled) {
+  .btn-flat:not(:disabled) {
     @apply bg-background-paper hover:bg-[#00000010] focus:bg-[#00000010] active:bg-[#00000005] !important;
   }
-  .btn-flat-primary {
+  .btn-chip {
+    @apply rounded-full text-xs font-normal font-sans py-2 !important;
+  }
+  .btn-chip:not(:disabled) {
+    @apply bg-[#00000008] text-text-secondary hover:text-text-primary;
+  }
+  .btn-chip.active {
+    @apply bg-[#00000012] focus:bg-[#00000012] text-secondary-dark !important;
+  }
+  .btn-flat-primary, .btn-chip-primary {
     @apply text-primary-dark !important;
   }
-  .btn-flat-secondary {
+  .btn-flat-secondary, .btn-chip-secondary {
     @apply text-secondary-dark !important;
   }
-  [class^="btn-flat"]:disabled {
-    @apply shadow-none bg-background-paper text-text-disabled !important;
-  }
+  
   button svg, [class^="btn"] svg, span svg {
     min-width: 1.25rem;
     min-height: 1.25rem;
     max-width: 1.5rem;
     max-height: 1.5rem;
+  }
+  .btn-chip svg {
+    min-width: 0.875rem;
+    min-height: 0.875rem;
+    max-width: 0.875rem;
+    max-height: 0.875rem;
   }
 
   /* Inputs */
@@ -116,4 +136,107 @@ code {
 
 a {
   font-weight: 500;
+}
+.logros-content {
+  display: flex;
+}
+.logros{
+  margin-left: 30px;
+font-size: 30px;
+
+}
+
+
+.logros-icon {
+  font-size: 60px;
+  margin: 20px;
+}
+.progress{
+  margin: 20px;
+
+
+}
+.info-data{
+display: flex;
+  
+}
+
+
+.habit-progress{
+  padding: 0px 20px; 
+
+  font-size: 20px;
+  
+}
+
+.centered-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px; /* Puedes ajustar la anchura máxima según tus necesidades */
+  margin: 10px; /* Centra horizontalmente */
+  padding: 50px; /* Espacio mínimo en los bordes */
+}
+
+/* Estilos específicos para el formulario de Restore */
+.restore-title {
+  text-align: center;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.restore-description {
+  color: #222b36;
+  text-align: justify;
+}
+
+.contact-support {
+  text-align: justify;
+  color: #222b36;
+  
+}
+
+.support-text {
+  color: #83AED4;
+}
+
+.email-label {
+  color: #000000;
+  font-weight: 700;
+}
+
+.email-input {
+  margin-top: 10px;
+}
+
+.recaptcha-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilos para el cuadro de reCAPTCHA */
+.g-recaptcha {
+  display: inline-block;
+  width: auto; /* Ajusta el ancho según tus necesidades */
+}
+
+/* Estilos para los errores del reCAPTCHA (opcional) */
+.recaptcha-error {
+  color: #ee252b; /* Color para errores */
+  font-size: 14px; /* Tamaño de fuente para errores */
+  margin-top: 10px; /* Espacio superior para errores */
+}
+
+.send-button {
+  background-color: #fbd254;
+  color: #222b36;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
 }
