@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment/moment';
 import 'moment/locale/es';
 import axios from 'axios';
@@ -8,28 +8,31 @@ import HabitCheckCard, { habitStates } from '../../components/habit/HabitCheckCa
 import { defaultGoal, goalDifficulties } from '../../components/habit/RegisterGoal';
 import LevelUp from '../../components/popups/LevelUp';
 import { apiData } from '../../common/apiData';
+import { UserContext } from '../../utils/UserConxtextProvider';
 moment.locale('es');
 
 const HabitsToday = () => {
+    const { user, setUser } = useContext(UserContext);
     const [todayHabits, setTodayHabits] = useState([]);
     // [
-    //     {   id: 0, habitIcon: "face-smile-beam", habitName: "hábito1", time: "15:00",
+    //     {   scheduleId: 0, habitIcon: "face-smile-beam", habitName: "hábito1", time: "15:00",
     //         difficulty: goalDifficulties.MEDIUM, habitGoalPerc: 10, goalProgress:20,
     //         goalName: defaultGoal.name, goalDescription: defaultGoal.description,
     //         done:false, "doneId": null, "doneDay": null
     //     },
-    //     {   id: 1, habitIcon: "face-smile-beam", habitName: "hábito2", time: "13:00",
+    //     {   scheduleId: 1, habitIcon: "face-smile-beam", habitName: "hábito2", time: "13:00",
     //         difficulty: goalDifficulties.EASY, habitGoalPerc: 10, goalProgress:20,
     //         goalName: defaultGoal.name, goalDescription: defaultGoal.description,
     //         done:true
     //     },
-    //     {   id: 2, habitIcon: "face-smile-beam", habitName: "hábito3", time: "10:00",
+    //     {   scheduleId: 2, habitIcon: "face-smile-beam", habitName: "hábito3", time: "10:00",
     //         difficulty: goalDifficulties.HARD, habitGoalPerc: 10, goalProgress:20,
     //         goalName: defaultGoal.name, goalDescription: defaultGoal.description,
     //         done:false
     //     },
     // ]
     const today = moment();
+    const todayDate = today.format("YYYY-MM-DD");
     const todayDay = today.isoWeekday();
 
     const [open, setOpen] = useState(false);
@@ -37,41 +40,84 @@ const HabitsToday = () => {
 
     const handleCheck = (th)=>{
         th.done = !th.done;
-        const index = todayHabits.findIndex((v)=>v.id === th.id);
-        if (index >= 0) {
-            todayHabits[index] = th;
-            if (th.done) { handleOpen(); };
-            setTodayHabits([...todayHabits]);
+        const index = todayHabits.findIndex((v)=>v.scheduleId === th.scheduleId);
+        if (index < 0) { return; }
+        
+        if (th.done) {
+            // setUser({...user, levelProgress: user.levelProgress + th.habitGoalPerc});
+            th.goalProgress += th.habitGoalPerc;
+            handleOpen();
+            
+            axios.post( apiData.baseUrl + '/habit/check', {
+                    scheduleId: th.scheduleId,
+                    today: todayDate,
+                    todayDay: todayDay,
+                })
+                .then(response => {
+                    console.log('checking', th);
+                })
+                .catch(error => {
+                    console.error('Error en check del hábito:', error);
+                });
+        }
+        else {
+            // setUser({...user, levelProgress: user.levelProgress - th.habitGoalPerc});
+            th.goalProgress -= th.habitGoalPerc;
+
+            axios.delete( apiData.baseUrl + '/habit/check', {
+                    params: {
+                        scheduleId: th.scheduleId,
+                        date: todayDate,
+                    }
+                })
+                .then(response => {
+                    console.log('unchecking', th);
+                })
+                .catch(error => {
+                    console.error('Error en check del hábito:', error);
+                });
+        }
+        
+        todayHabits[index] = th;
+        setTodayHabits([...todayHabits]);
+    };
+
+    const handleOpen = () => {
+        if (open) {
+            setOpen(false);
+        }
+        else if (user.levelProgress >= 100){
+            setOpen(true);
         }
     };
-    const handleOpen = () => setOpen(!open);
     
     useEffect(() => {
         axios.get(apiData.baseUrl + '/habit/check', {
-            params: {
-                userId: 1,
-                todayDay: todayDay,
-                today: today.format("YYYY-MM-DD"),
-            }
-        })
+                params: {
+                    userId: user.id,
+                    todayDay: todayDay,
+                    today: todayDate,
+                }
+            })
             .then(response => {
                 let _habits = response.data.habitsCheck.map((hc)=>{
                     return ({...hc, done:hc.doneId!==null});
                 });
                 setTodayHabits(_habits);
-                console.error('Habitos de hoy ', today.format("YYYY-MM-DD"), ' d'+todayDay, 'cargados');
+                console.error('Habitos de hoy ', todayDate, ' d'+todayDay, 'cargados');
             })
             .catch(error => {
                 console.error('Error al obtener los hábitos para confirmar:', error);
             });
     }, []);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(moment())
         }, 60000)
         // Clean up the interval when the component unmounts
         return () => clearInterval(interval)
-    }, [])
+    }, []);
 
     return (
         <div className='w-full h-full flex'>

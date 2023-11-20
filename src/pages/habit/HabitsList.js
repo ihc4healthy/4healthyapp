@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Typography, Button } from '@material-tailwind/react';
 import { PlusIcon } from '@heroicons/react/24/solid';
@@ -6,8 +6,10 @@ import FAIcon from '../../components/FAIcon';
 import { DSidebar } from '../../components/Sidenav';
 import { Link } from 'react-router-dom';
 import { apiData } from '../../common/apiData';
+import { UserContext } from '../../utils/UserConxtextProvider';
 
 const HabitsList = () => {
+    const { user, setUser } = useContext(UserContext);
     // "userId": number,
     // "goalId": number,
     // "goalName": string,
@@ -23,7 +25,7 @@ const HabitsList = () => {
     useEffect(() => {
         axios.get(apiData.baseUrl + '/habits', {
             params: {
-                userId: 1,
+                userId: user.id,
             }
         })
             .then(response => {
