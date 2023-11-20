@@ -6,7 +6,7 @@ const Header = ()=>{
     return (
         <header className="container mx-auto">
             <Link to="/">
-                <img src={logo} className="logo" alt="logo" />
+                <img src={logo} className="logo max-h-14" alt="logo"/>
             </Link>
         </header>
     );

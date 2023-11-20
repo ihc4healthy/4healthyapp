@@ -1,29 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
 
-:root {
-   --primary-light: #fce978;
-   --primary-main: #fbd254;
-   --primary-dark: #eca540;
-   --secondary-light: #00d9f4;
-   --secondary-main: #009ed5;
-   --secondary-dark: #3b719f;
-   --text-primary: #222b36;
-   --text-secondary: #7a8291;
-   --text-disabled: #c5c8cf;
-   --background-back: #fafbfc;
-   --background-paper: #ffffff;
-   --background-disabled: #e2e7ec;
-   --state-info: #75baf6;
-   --state-success: #00ebab;
-   --state-warning: #000000;
-   --state-danger: #ee252b;
-   --shadow-lvl1: 0px 0px 4pt rgba(0, 0, 0, 0.3);
-   --shadow-lvl2: 0px 0px 8pt rgba(0, 0, 0, 0.3);
-   --shadow-lvl3: 0px 0px 16pt rgba(0, 0, 0, 0.3);
-   --font-headings: 'Poppins', 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-   --font-display: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 body {
     margin: 0;
     padding: 0;

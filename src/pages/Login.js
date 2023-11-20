@@ -14,8 +14,8 @@ function Login() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     
-    const [passwordComp, setPasswordComp] = useState({color:"primary", helper:"Enter your password", isReady:false});
-    const [userComp, setUserComp] = useState({color:"primary", helper:"Enter your username", isReady:false});
+    const [passwordComp, setPasswordComp] = useState({color:"primary", helper:"Ingresa tu contraseña", isReady:false});
+    const [userComp, setUserComp] = useState({color:"primary", helper:"Ingresa tu usuario", isReady:false});
     const [canLogin, setCanLogin] = useState(false);
     
     useEffect(()=>{
@@ -26,7 +26,7 @@ function Login() {
         }
         else {
             if (!registeredPasswords.includes(password)) {
-                passwordComp.helper = "Incorrect password";
+                passwordComp.helper = "Clave incorrecta";
             }
             else {
                 isOk = true;
@@ -45,7 +45,7 @@ function Login() {
         }
         else {
             if (!registeredUsernames.includes(username)) {
-                userComp.helper = "Username does not exist";
+                userComp.helper = "Usuario no existe";
             }
             else {
                 isOk = true;
@@ -81,11 +81,11 @@ function Login() {
                             type="text" color={userComp.color} setValue={setUsername}/>
                         <Input label="Contraseña" placeholder="******" helpText={passwordComp.helper}
                             type="password" color={passwordComp.color} setValue={setPassword}/>
-                            <a href='#/' className='text-secondary'>¿Has olvidado tu contraseña?</a>
+                            <a href='#/restore' className='text-secondary'>¿Has olvidado tu contraseña?</a>
 
-                        <p>¿Aun no eres parte de 4Healty? <a href='#/' className='text-secondary'>Únete</a></p>
+                        <p>¿Aun no eres parte de 4Healty? <Link to="/" className='text-secondary'>Únete</Link></p>
 
-                        <Link to="/welcome">
+                        <Link to="/logros">
                             <button className='btn-primary w-full' type='submit' disabled={!canLogin}>
                                 INICIA SESIÓN
                             </button>

@@ -1,7 +1,7 @@
 
 @layer {
     .toggle-button button, .toggle-button [class^="btn"] {
-        @apply hover:bg-[#00000005] active:bg-[#00000010] !important;
+        @apply hover:bg-[#00000005] active:bg-[#00000010] gap-1 !important;
     }
     .toggle-button button.active, .toggle-button [class^="btn"].active {
         @apply bg-[#00000010] !important;
@@ -9,6 +9,7 @@
 }
 
 .toggle-button button svg, .toggle-button [class^="btn"] svg {
+    height: auto;
     min-width: 1.5rem;
     min-height: 1.5rem;
     max-width: 2.5rem;
