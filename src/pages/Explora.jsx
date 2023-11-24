@@ -4,6 +4,9 @@ import Header from '../components/Header';
 import { DSidebar } from '../components/Sidenav';
 
 const Explora = () => {
+
+  
+
   return (
     <div className='full-page '>
         <Header/> 
