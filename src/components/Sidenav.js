@@ -40,7 +40,7 @@ export const DSidebar = () => {
     {
       icon: <Cog6ToothIcon className="h-5 w-5" />,
       text: "EXPLORA",
-      url: "#",
+      url: "/explora",
     },
     {
       icon: <PowerIcon className="h-5 w-5" />,
