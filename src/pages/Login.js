@@ -36,6 +36,11 @@ function Login() {
         })
         .catch(error => {
             console.error('Error en el inicio de sesión:', error);
+            if (error.response && error.response.status === 401) {
+                passwordComp.helper = "Usuario o contraseña incorrecta";
+                setUserComp({...userComp, color:'danger'});
+                setPasswordComp({...passwordComp, color:"danger"});
+            }
         });
     };
 
@@ -69,13 +74,13 @@ function Login() {
         else {
             isOk = true;
             userComp.isReady = true;
-            //if (!registeredUsernames.includes(username)) {
-            //    userComp.helper = "Usuario no existe";
-            //}
-            //else {
-            //    isOk = true;
-            //    userComp.isReady = true;
-            //}
+            if (!registeredUsernames.includes(username)) {
+                userComp.helper = "Usuario no existe";
+            }
+            else {
+                isOk = true;
+                userComp.isReady = true;
+            }
         }
         if (isOk) { userComp.helper = ""; }
         setUserComp({...userComp, color:isOk?'primary':'danger'});
@@ -113,7 +118,6 @@ function Login() {
                         <Button color='primary' className='w-full' disabled={!canLogin} onClick={handleLogin}>
                         Inicia Sesión
                         </Button>
-
 
                     </form>
                 </div>
