@@ -38,9 +38,14 @@ export const DSidebar = () => {
       url: "/Comunitylist",
     },
     {
+      icon: <HeartIcon className="h-5 w-5" />,
+      text: "EXPLORA",
+      url: "#",
+    },
+    {
       icon: <Cog6ToothIcon className="h-5 w-5" />,
-      text: "CUENTA",
-      url: "/configuration",
+      text: "CONFIGURACION",
+      url: "/Links",
     },
     {
       icon: <PowerIcon className="h-5 w-5" />,

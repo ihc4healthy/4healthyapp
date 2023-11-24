@@ -16,6 +16,8 @@ import { UserContext } from './utils/UserConxtextProvider';
 import CommunityList from './pages/community/CommunityList';
 import NewComment from './pages/community/NewComment';
 import Configuration from './pages/Configuration';// import Example from './pages/Example';
+import Links from './pages/Links';
+// import Example from './pages/Example';
 
 function App() {
   const useHash = true;
@@ -44,7 +46,7 @@ function App() {
         <Route path='/Comunitylist' element={<CommunityList/>}/>
         <Route path='/NewComment' element={<NewComment/>}/>
         <Route path='/configuration' element={<Configuration/>}/>
-
+        <Route path='/Links' element={<Links/>}/>
       </Routes>
     </Router>
   );
