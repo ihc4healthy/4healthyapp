@@ -9,6 +9,7 @@ import {
   InboxIcon,
   PowerIcon,
   HeartIcon,
+  GlobeAltIcon
 } from "@heroicons/react/24/solid";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -43,8 +44,8 @@ export const DSidebar = () => {
       url: "#",
     },
     {
-      icon: <Cog6ToothIcon className="h-5 w-5" />,
-      text: "CONFIGURACION",
+      icon: <GlobeAltIcon className="h-5 w-5" />,
+      text: "CONECTA",
       url: "/Links",
     },
     {
