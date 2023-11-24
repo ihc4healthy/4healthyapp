@@ -15,7 +15,7 @@ import HabitsList from './pages/habit/HabitsList';
 import { UserContext } from './utils/UserConxtextProvider';
 import CommunityList from './pages/community/CommunityList';
 import NewComment from './pages/community/NewComment';
-// import Example from './pages/Example';
+import Configuration from './pages/Configuration';// import Example from './pages/Example';
 
 function App() {
   const useHash = true;
@@ -43,6 +43,8 @@ function App() {
         <Route path='/today' element={<HabitsToday/>}/>
         <Route path='/Comunitylist' element={<CommunityList/>}/>
         <Route path='/NewComment' element={<NewComment/>}/>
+        <Route path='/configuration' element={<Configuration/>}/>
+
       </Routes>
     </Router>
   );

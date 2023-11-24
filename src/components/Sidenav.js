@@ -30,7 +30,7 @@ export const DSidebar = () => {
       icon: <InboxIcon className="h-5 w-5" />,
       text: "ESTADÍSTICAS",
       badge: 14,
-      url: "#",
+      url: "/logros",
     },
     {
       icon: <UserCircleIcon className="h-5 w-5" />,
@@ -39,8 +39,8 @@ export const DSidebar = () => {
     },
     {
       icon: <Cog6ToothIcon className="h-5 w-5" />,
-      text: "EXPLORA",
-      url: "#",
+      text: "CUENTA",
+      url: "/configuration",
     },
     {
       icon: <PowerIcon className="h-5 w-5" />,
