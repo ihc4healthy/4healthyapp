@@ -15,6 +15,7 @@ import HabitsList from './pages/habit/HabitsList';
 import { UserContext } from './utils/UserConxtextProvider';
 import CommunityList from './pages/community/CommunityList';
 import NewComment from './pages/community/NewComment';
+import Links from './pages/Links';
 // import Example from './pages/Example';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path='/today' element={<HabitsToday/>}/>
         <Route path='/Comunitylist' element={<CommunityList/>}/>
         <Route path='/NewComment' element={<NewComment/>}/>
+        <Route path='/Links' element={<Links/>}/>
       </Routes>
     </Router>
   );
