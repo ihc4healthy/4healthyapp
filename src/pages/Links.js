@@ -52,9 +52,11 @@ const CommunityList = () => {
                 console.log('Signed up!', response.data.user);
                 // {id: 1, username: username, password: password, profilePic:1, level:1, levelProgress:10}
                 setUser(response.data.user);
+                alert("Cuenta Vinculada");
             })
             .catch(error => {
                 console.error('Error al vincular cuenta:', error);
+                alert('Error al vincular cuenta:', error);
             });
         }
     };
@@ -64,6 +66,9 @@ const CommunityList = () => {
         if (password.length === 0) {
             isOk = true;
             passwordComp.isReady = false;
+        }else{
+            isOk = true;
+            passwordComp.isReady = true;
         }
 
         if (isOk) { passwordComp.helper = ""; }
@@ -86,19 +91,8 @@ const CommunityList = () => {
             }
         }
         else {
-            if (username.length > 16) {
-                userComp.helper = "Máximo 16 caracteres";
-            }
-            else if (!regex.userName.test(username)){
-                userComp.helper = "Solo usar letras, números, o los caracteres _ . -";
-            }
-            else if (existentUsernames.includes(username)) {
-                userComp.helper = "Usuario ya existente";
-            }
-            else {
-                isOk = true;
-                userComp.isReady = true;
-            }
+            isOk = true;
+            userComp.isReady = true;
         }
         if (isOk) { userComp.helper = ""; }
         setUserComp({...userComp, color:isOk?'primary':'danger'});
