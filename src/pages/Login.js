@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Button } from '@material-tailwind/react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import clock from '../svgs/clock.svg';
 import Input from '../components/Input';
-//import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
-import { Link } from 'react-router-dom';
+import clock from '../svgs/clock.svg';
 import { regex } from '../utils/regexs';
+import { UserContext } from '../utils/UserConxtextProvider';
+import { apiData } from '../common/apiData';
 
 function Login() {
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
     const registeredUsernames = ['aaaa','bbbb','cccc'];
     const registeredPasswords = ['pass1', 'pass2', 'pass3']; // Add your registered passwords here
 
@@ -18,6 +23,27 @@ function Login() {
     const [userComp, setUserComp] = useState({color:"primary", helper:"Ingresa tu usuario", isReady:false});
     const [canLogin, setCanLogin] = useState(false);
     
+    const handleLogin = (event) => {
+        event.preventDefault();
+        axios.post(apiData.baseUrl + '/user/login', {
+            name: username,
+            password: password,
+        })
+        .then(response => {
+            console.log('Logged in!', response.data.user);
+            setUser(response.data.user);
+            navigate("/logros");
+        })
+        .catch(error => {
+            console.error('Error en el inicio de sesión:', error);
+            if (error.response && error.response.status === 401) {
+                passwordComp.helper = "Usuario o contraseña incorrecta";
+                setUserComp({...userComp, color:'danger'});
+                setPasswordComp({...passwordComp, color:"danger"});
+            }
+        });
+    };
+
     useEffect(()=>{
         let isOk = false;
         if (password.length == 0) {
@@ -25,13 +51,15 @@ function Login() {
             passwordComp.isReady = false;
         }
         else {
-            if (!registeredPasswords.includes(password)) {
-                passwordComp.helper = "Clave incorrecta";
-            }
-            else {
-                isOk = true;
-                passwordComp.isReady = true;
-            }
+            isOk = true;
+            passwordComp.isReady = true;
+            //if (!registeredPasswords.includes(password)) {
+            //    passwordComp.helper = "Clave incorrecta";
+            //}
+            //else {
+            //    isOk = true;
+            //    passwordComp.isReady = true;
+            //}
         }
         if (isOk) { passwordComp.helper = ""; }
         setPasswordComp({...passwordComp, color:isOk?"primary":"danger"});
@@ -44,6 +72,8 @@ function Login() {
             userComp.isReady = false;
         }
         else {
+            isOk = true;
+            userComp.isReady = true;
             if (!registeredUsernames.includes(username)) {
                 userComp.helper = "Usuario no existe";
             }
@@ -85,11 +115,10 @@ function Login() {
 
                         <p>¿Aun no eres parte de 4Healty? <Link to="/" className='text-secondary'>Únete</Link></p>
 
-                        <Link to="/logros">
-                            <button className='btn-primary w-full' type='submit' disabled={!canLogin}>
-                                INICIA SESIÓN
-                            </button>
-                        </Link>
+                        <Button color='primary' className='w-full' disabled={!canLogin} onClick={handleLogin}>
+                        Inicia Sesión
+                        </Button>
+
                     </form>
                 </div>
             </main>
