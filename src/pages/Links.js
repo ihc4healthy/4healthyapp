@@ -43,8 +43,9 @@ const CommunityList = () => {
     const handleSave = (event)=>{
         event.preventDefault();
         if (canSignup) {
-            axios.post( apiData.baseUrl + '/user', {
-                name: username,
+            axios.patch( apiData.baseUrl + '/user/social', {
+                id:'1',
+                email: username,
                 password: password,
             })
             .then(response => {
@@ -53,7 +54,7 @@ const CommunityList = () => {
                 setUser(response.data.user);
             })
             .catch(error => {
-                console.error('Error en check del hábito:', error);
+                console.error('Error al vincular cuenta:', error);
             });
         }
     };
