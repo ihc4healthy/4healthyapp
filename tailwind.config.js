@@ -35,6 +35,14 @@ colors = {
     back: '#fafbfc',
     paper: '#ffffff',
     disabled: '#e2e7ec',
+  },
+  state:{
+    success:'#62E9A0',
+  },
+
+  card: '#DADADA',
+  botton:{
+    desactivate:'#F7F7F7',
   }
 };
 
