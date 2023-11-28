@@ -44,7 +44,6 @@ const CommunityList = () => {
         event.preventDefault();
         if (canSignup) {
             axios.patch( apiData.baseUrl + '/user/social', {
-                id:'1',
                 email: username,
                 password: password,
             })
